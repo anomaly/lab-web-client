@@ -16,30 +16,41 @@ Standard Libraries:
 - [ ] React Hook Forms
 - [ ] React Drop Zone for file upload 
 
-
+As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 # Development
 
-`HTTPS=true yarn start`
+The React app is configured to run with a signed SSL certificate and proxy the FastAPI application running in the development container.
+
+Once setup you can run the development servers via:
+
+```bash
+yarn start
+```
+
+> React uses the `HTTPS` environment variable to run run in secure mode `HTTPS=true yarn start`, we make a more permanent change in `package.json` to save us having to do this manually.
 
 ## SSL during Development
 
-[mkcert](https://github.com/FiloSottile/mkcert)
+The intent here is run SSL (which is as close to development as possible) but without needing to introduce yet another tool (e.g a reverse proxy).
 
-Install mkcert tool
+[mkcert](https://github.com/FiloSottile/mkcert) allows us to provision a SSL certificate for our development environment.
+
+Install mkcert via `brew`:
 ```sh
 $ brew install mkcert
 ```
-Install nss (only needed if you use Firefox)
+Install nss (this is only needed if you use Firefox)
 ```sh
 $ brew install nss
 ```
 
-Setup mkcert on your machine (creates a CA)
+Setup mkcert on your machine (this register it as a certificate authority)
 ```
 $ mkcert -install
 ```
 
-`package.json` looks like this:
+Next we modify the `start` script to use SSL, this saves us having to set the `HTTPS` environment variable manually:
+
 ```json
 "scripts": {
     "start": "HTTPS=true react-scripts start",
@@ -59,7 +70,7 @@ Generate the certificate (ran from the root of this project)
 mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
 ```
 
-`package.json` is 
+Lastly update `package.json` so the `start` script can use the generated certificate:
 ```json
   "scripts": {
     "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
@@ -69,11 +80,30 @@ mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
   },
 ```
 
-## React Proxy
+## Using React to proxy the API
 
-http-proxy-middleware
-https://create-react-app.dev/docs/proxying-api-requests-in-development/
-https://www.npmjs.com/package/http-proxy-middleware
+Our intention is to keep things simple and not introduce tools unless it's absolutely necessary. CRA provides a guide to [proxying](https://create-react-app.dev/docs/proxying-api-requests-in-development/) APIs calls. There's a simple setup and then a more complex one that uses [http-proxy-middleware](https://www.npmjs.com/package/http-proxy-middleware).
+
+We need to use the later for so we can configure stripping the prefix from the API calls. This is necessary because of the way our FastAPI application is configured in the docker container. You can read about this in the [server labs](https://github.com/anomaly/labs-python-server).
+
+In principle what we are doing is stripping the `/api` prefix from the calls i.e `/api/ext/echo` is proxied to `/ext/echo` on `http://localhost:8000`.
+
+`http-proxy-middleware` provides a `pathRewrite` option to achieve this, this is detailed in their documentation, the following is an example that works for us:
+
+```javascript
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:8000/',
+      changeOrigin: true,
+      pathRewrite: {'^/api' : ''} // Removes the prefix so the container responds properly
+    })
+  );
+};
+```
 
 
 # References
