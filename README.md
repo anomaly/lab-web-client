@@ -1,12 +1,12 @@
 # Lab - Standardised Web Client
 
 Objectives:
--  [X] Typescript based Create React App base project
--  [ ] Validated SSL without any other dependencies
--  [ ] Internationalization support
--  [ ] Tailwind CSS based theming support
--  [ ] Meeting W3C AAA Accessibility
-
+- [X] Typescript based Create React App base project
+- [X] Validated SSL without any other dependencies
+- [ ] Internationalization support
+- [ ] Tailwind CSS based theming support
+- [ ] Meeting W3C AAA Accessibility
+- [X] Proxy API from Docker container without any other dependencies 
 
 Standard Libraries:
 - [ ] Page routing with React Router
@@ -69,6 +69,11 @@ mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
   },
 ```
 
+## React Proxy
+
+http-proxy-middleware
+https://create-react-app.dev/docs/proxying-api-requests-in-development/
+https://www.npmjs.com/package/http-proxy-middleware
 
 
 # References
