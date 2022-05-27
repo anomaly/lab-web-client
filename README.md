@@ -17,7 +17,7 @@ Standard Libraries:
 - [ ] React Drop Zone for file upload 
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
-# Development
+## Development
 
 The React app is configured to run with a signed SSL certificate and proxy the FastAPI application running in the development container.
 
@@ -104,9 +104,10 @@ module.exports = function(app) {
   );
 };
 ```
-
-
-# References
+## References
 
 - [mkcert](https://github.com/FiloSottile/mkcert), by [Filippo Valsorda](https://filippo.io)
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
+
+## License
+Content of this repository are licensed under the Apache 2.0 license.
