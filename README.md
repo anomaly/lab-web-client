@@ -4,7 +4,7 @@ Objectives:
 - [X] Typescript based Create React App base project
 - [X] Validated SSL without any other dependencies
 - [ ] Internationalization support
-- [ ] Tailwind CSS based theming support
+- [X] Tailwind CSS based theming support
 - [ ] Meeting W3C AAA Accessibility
 - [X] Proxy API from Docker container without any other dependencies 
 
