@@ -7,6 +7,8 @@ Objectives:
 - [X] Tailwind CSS based theming support
 - [ ] Meeting W3C AAA Accessibility
 - [X] Proxy API from Docker container without any other dependencies 
+- [ ] Establish a pattern for [monorepos](https://www.robinwieruch.de/javascript-monorepos/) for applications with multiple modules.
+- [ ] End-to-end testing using [Microsoft Playwright](https://playwright.dev/)
 
 Standard Libraries:
 - [ ] Page routing with React Router
@@ -14,7 +16,7 @@ Standard Libraries:
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
 - [ ] Loading skeletons
 - [ ] React Hook Forms
-- [ ] React Drop Zone for file upload 
+- [ ] React Drop Zone for file upload
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Development
@@ -110,4 +112,4 @@ module.exports = function(app) {
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
 
 ## License
-Content of this repository are licensed under the Apache 2.0 license.
+Contents of this repository are licensed under the Apache 2.0 license.
