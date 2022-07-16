@@ -15,6 +15,7 @@ Standard Libraries:
 - [ ] Loading skeletons
 - [ ] React Hook Forms
 - [ ] React Drop Zone for file upload 
+- [ ] Research and recommend animation libraries
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Development
