@@ -115,6 +115,9 @@ FastAPI has a few recommendations on [how to generate clients](https://fastapi.t
 
 > Code readability greatly improves developer productivity
 
+
+
+
 ```
 curl https://localhost:3000/api/openapi.json -o swagger.json
 ```
