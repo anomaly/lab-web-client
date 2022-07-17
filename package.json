@@ -30,7 +30,7 @@
     "eject": "react-scripts eject",
     "fetch-swagger": "curl https://localhost:3000/api/openapi.json -o src/api/swagger.json",
     "generate-ar": "autorest --typescript --input-file=src/api/swagger.json --output-folder=src/api/ar",
-    "generate-otc": "openapi --input src/api/swagger.json --output src/api/otc"
+    "generate-otc": "openapi --input src/api/swagger.json --output src/api/otc --name LabsApiClient"
   },
   "eslintConfig": {
     "extends": [

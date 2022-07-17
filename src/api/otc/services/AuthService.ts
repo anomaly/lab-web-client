@@ -4,10 +4,11 @@
 import type { User } from '../models/User';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
 export class AuthService {
+
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
      * Verify User Account
@@ -16,8 +17,8 @@ export class AuthService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static verifyUserAccountAuthVerifyGet(): CancelablePromise<any> {
-        return __request(OpenAPI, {
+    public verifyUserAccountAuthVerifyGet(): CancelablePromise<any> {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/auth/verify',
         });
@@ -32,8 +33,8 @@ export class AuthService {
      * @returns User Successful Response
      * @throws ApiError
      */
-    public static getMeAuthMeGet(): CancelablePromise<User> {
-        return __request(OpenAPI, {
+    public getMeAuthMeGet(): CancelablePromise<User> {
+        return this.httpRequest.request({
             method: 'GET',
             url: '/auth/me',
         });
@@ -45,8 +46,8 @@ export class AuthService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static loginUserAuthLoginPost(): CancelablePromise<any> {
-        return __request(OpenAPI, {
+    public loginUserAuthLoginPost(): CancelablePromise<any> {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/auth/login',
         });
@@ -57,8 +58,8 @@ export class AuthService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static logoutUserAuthLogoutPost(): CancelablePromise<any> {
-        return __request(OpenAPI, {
+    public logoutUserAuthLogoutPost(): CancelablePromise<any> {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/auth/logout',
         });
@@ -69,8 +70,8 @@ export class AuthService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static signupUserAuthSignupPost(): CancelablePromise<any> {
-        return __request(OpenAPI, {
+    public signupUserAuthSignupPost(): CancelablePromise<any> {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/auth/signup',
         });
@@ -81,8 +82,8 @@ export class AuthService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static loginAuthAccountPost(): CancelablePromise<any> {
-        return __request(OpenAPI, {
+    public loginAuthAccountPost(): CancelablePromise<any> {
+        return this.httpRequest.request({
             method: 'POST',
             url: '/auth/account',
         });

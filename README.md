@@ -119,13 +119,21 @@ FastAPI has a few recommendations on [how to generate clients](https://fastapi.t
 curl https://localhost:3000/api/openapi.json -o swagger.json
 ```
 
-[autorest]()
+### [autorest]()
 
 ```
 autorest --typescript --input-fileswagger.json --output-folder=autorest
 ```
 
-[openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
+Add your `autorest` client as a local package
+
+```
+yarn add file:./src/api/ar
+```
+
+[Using your client](https://github.com/Azure/autorest.typescript/blob/main/docs/client/readme.md)
+
+### [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
 ```
 openapi --input ./swagger.json --output ./generated
@@ -143,8 +151,4 @@ openapi --input ./swagger.json --output ./generated
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
 
 ## License
-<<<<<<< HEAD
 Contents of this repository are licensed under the Apache 2.0 license.
-=======
-Content of this repository are licensed under the Apache 2.0 license.
->>>>>>> origin/master
