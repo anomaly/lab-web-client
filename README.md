@@ -5,11 +5,14 @@ Objectives:
 - [X] Validated SSL without any other dependencies
 - [ ] Internationalization support
 - [X] Tailwind CSS based theming support
+- [ ] Header `<head>` management for usability using [Helment](https://github.com/nfl/react-helmet)
 - [ ] Meeting W3C AAA Accessibility
 - [X] Proxy API from Docker container without any other dependencies 
+- [ ] Establish a pattern for [monorepos](https://www.robinwieruch.de/javascript-monorepos/) for applications with multiple modules.
+- [ ] End-to-end testing using [Microsoft Playwright](https://playwright.dev/)
 
 Standard Libraries:
-- [ ] Page routing with React Router
+- [ ] Page routing with [React Router](https://reactrouter.com/)
 - [ ] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
 - [ ] Loading skeletons
@@ -18,7 +21,7 @@ Standard Libraries:
 - [ ] Research and recommend animation libraries
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
-## Development
+## Developing the client
 
 The React app is configured to run with a signed SSL certificate and proxy the FastAPI application running in the development container.
 
@@ -105,10 +108,43 @@ module.exports = function(app) {
   );
 };
 ```
+
+## Generating API Clients
+
+FastAPI has a few recommendations on [how to generate clients](https://fastapi.tiangolo.com/advanced/generate-clients/?h=) for the API. The following are options that we hve narrowed down to and provide usage guidelines for. An extremely central aim in choosing a client API generator is code readability, this is achieved by naming methods well on the server and configuring the client to generate sensible names.
+
+> Code readability greatly improves developer productivity
+
+```
+curl https://localhost:3000/api/openapi.json -o swagger.json
+```
+
+[autorest]()
+
+```
+autorest --typescript --input-fileswagger.json --output-folder=autorest
+```
+
+[openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
+
+```
+openapi --input ./swagger.json --output ./generated
+```
+
+## Internationalization
+
+## Structure
+
+## End-to-end testing
+
 ## References
 
 - [mkcert](https://github.com/FiloSottile/mkcert), by [Filippo Valsorda](https://filippo.io)
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
 
 ## License
+<<<<<<< HEAD
+Contents of this repository are licensed under the Apache 2.0 license.
+=======
 Content of this repository are licensed under the Apache 2.0 license.
+>>>>>>> origin/master

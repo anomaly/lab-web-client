@@ -11,8 +11,13 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.3",
     "http-proxy-middleware": "^2.0.6",
+    "i18next": "^21.8.14",
+    "openapi-typescript-codegen": "^0.23.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^11.18.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
@@ -21,7 +26,10 @@
     "start": "HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fetch-swagger": "curl https://localhost:3000/api/openapi.json -o src/api/swagger.json",
+    "generate-ar": "autorest --typescript --input-file=src/api/swagger.json --output-folder=src/api/ar",
+    "generate-otc": "openapi --input src/api/swagger.json --output src/api/otc"
   },
   "eslintConfig": {
     "extends": [
