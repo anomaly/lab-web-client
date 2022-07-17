@@ -5,15 +5,15 @@ Objectives:
 - [X] Validated SSL without any other dependencies
 - [ ] Internationalization support
 - [X] Tailwind CSS based theming support
-- [ ] Header `<head>` management for usability using [Helment](https://github.com/nfl/react-helmet)
+- [ ] Header `<head>` management for usability using [Helmet](https://github.com/nfl/react-helmet)
 - [ ] Meeting W3C AAA Accessibility
 - [X] Proxy API from Docker container without any other dependencies 
 - [ ] Establish a pattern for [monorepos](https://www.robinwieruch.de/javascript-monorepos/) for applications with multiple modules.
 - [ ] End-to-end testing using [Microsoft Playwright](https://playwright.dev/)
+- [X] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
 Standard Libraries:
 - [ ] Page routing with [React Router](https://reactrouter.com/)
-- [ ] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
 - [ ] Loading skeletons
 - [ ] React Hook Forms
