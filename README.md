@@ -204,6 +204,11 @@ A sample usage would look as following:
 
 ## Structure
 
+The following is an evolving conversation. While there's no official pattern for folder structures, what we have obtained from reading various articles from experienced developers is that project structures are an evolving idea, in general we follow these principles:
+
+- `src/components`, contain components that are truly reused around the project, if there's a particular component tied to a view then it makes more sense to keep it within the view folder.
+- `src/views`, contains views for the application. These should be grouped by function e.g authentication, dashboard.
+
 ## End-to-end testing
 
 ## References
