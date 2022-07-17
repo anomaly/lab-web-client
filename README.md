@@ -16,8 +16,9 @@ Standard Libraries:
 - [ ] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
 - [ ] Loading skeletons
-- [ ] [React Hook Forms](https://react-hook-form.com/get-started/)
-- [ ] React Drop Zone for file upload
+- [ ] React Hook Forms
+- [ ] React Drop Zone for file upload 
+- [ ] Research and recommend animation libraries
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Developing the client
@@ -142,4 +143,8 @@ openapi --input ./swagger.json --output ./generated
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
 
 ## License
+<<<<<<< HEAD
 Contents of this repository are licensed under the Apache 2.0 license.
+=======
+Content of this repository are licensed under the Apache 2.0 license.
+>>>>>>> origin/master
