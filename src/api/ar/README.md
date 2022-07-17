@@ -1,6 +1,6 @@
-# Labs client library for JavaScript
+# LabsApi client library for JavaScript
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Labs client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for LabsApi client.
 
 
 This project provides a reference Python API built using FastAPI, the 
@@ -12,7 +12,7 @@ aim of the project is:
 
 
 
-[Package (NPM)](https://www.npmjs.com/package/labs) |
+[Package (NPM)](https://www.npmjs.com/package/labsApi) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -25,12 +25,12 @@ aim of the project is:
 See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 
-### Install the `labs` package
+### Install the `labsApi` package
 
-Install the Labs client library for JavaScript with `npm`:
+Install the LabsApi client library for JavaScript with `npm`:
 
 ```bash
-npm install labs
+npm install labsApi
 ```
 
 
@@ -40,7 +40,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Key concepts
 
-### Labs
+### LabsApi
 
-`Labs` is the primary interface for developers using the Labs client library. Explore the methods on this client object to understand the different features of the Labs service that you can access.
+`LabsApi` is the primary interface for developers using the LabsApi client library. Explore the methods on this client object to understand the different features of the LabsApi service that you can access.
 

@@ -2,7 +2,7 @@ import { Get } from "../operationsInterfaces";
 import * as coreClient from "@azure/core-client";
 import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
-import { Labs } from "../labs";
+import { LabsApi } from "../labsApi";
 import {
   GetMeAuthMeGetOptionalParams,
   GetMeAuthMeGetResponse
@@ -10,13 +10,13 @@ import {
 
 /** Class containing Get operations. */
 export class GetImpl implements Get {
-  private readonly client: Labs;
+  private readonly client: LabsApi;
 
   /**
    * Initialize a new instance of the class Get class.
    * @param client Reference to the service client
    */
-  constructor(client: Labs) {
+  constructor(client: LabsApi) {
     this.client = client;
   }
 

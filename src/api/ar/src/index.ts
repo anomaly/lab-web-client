@@ -1,3 +1,3 @@
 export * from "./models";
-export { Labs } from "./labs";
+export { LabsApi } from "./labsApi";
 export * from "./operationsInterfaces";

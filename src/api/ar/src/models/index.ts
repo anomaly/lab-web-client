@@ -120,7 +120,7 @@ export type RootGetResponse = {
 };
 
 /** Optional parameters. */
-export interface LabsOptionalParams extends coreClient.ServiceClientOptions {
+export interface LabsApiOptionalParams extends coreClient.ServiceClientOptions {
   /** server parameter */
   $host?: string;
   /** Overrides client endpoint. */

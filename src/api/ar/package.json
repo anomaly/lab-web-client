@@ -1,8 +1,8 @@
 {
-  "name": "labs",
+  "name": "labsApi",
   "sdk-type": "mgmt",
   "author": "Microsoft Corporation",
-  "description": "A generated SDK for Labs.",
+  "description": "A generated SDK for LabsApi.",
   "version": "1.0.0-beta.1",
   "engines": { "node": ">=12.0.0" },
   "dependencies": {
@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist-esm/index.js",
-  "types": "./types/labs.d.ts",
+  "types": "./types/labsApi.d.ts",
   "devDependencies": {
     "@microsoft/api-extractor": "7.18.11",
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -80,7 +80,7 @@
   },
   "sideEffects": false,
   "//metadata": {
-    "constantPaths": [{ "path": "src/labs.ts", "prefix": "packageDetails" }]
+    "constantPaths": [{ "path": "src/labsApi.ts", "prefix": "packageDetails" }]
   },
   "autoPublish": true
 }
