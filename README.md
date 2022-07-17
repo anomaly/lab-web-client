@@ -115,32 +115,90 @@ FastAPI has a few recommendations on [how to generate clients](https://fastapi.t
 
 > Code readability greatly improves developer productivity
 
-
-
-
+You will require the `openapi.json` file which you can fetch using `cURL`:
 ```
-curl https://localhost:3000/api/openapi.json -o swagger.json
+curl https://localhost:3000/api/openapi.json -o src/api/openapi.json
 ```
 
-### [autorest]()
+`package.json` contains a script called `fetch-openapi` which you can use to the run the above command.
+
+> autorest requires you to provide a fully qualified name for the API
+
+
+The labs project has evaluated the following client API generators:
+
+### [autorest](https://github.com/azure/autorest.typescript)
+
+Part of the Microsoft Azure SDK for TypeScript, autorest provides client libraries for many languages including Python. The Typescript client. `autorest can be installed via `npm` to be available globally:
 
 ```
-autorest --typescript --input-fileswagger.json --output-folder=autorest
+npm install -g autorest
 ```
 
-Add your `autorest` client as a local package
+following this you should be able to generate a client using `autorest` as follows, use the `--typescript` flag to generate a Typescript client:
+
+```
+autorest --typescript --input-file=src/api/openapi.json --output-folder=src/api/ar
+```
+`package.json` contains a script called `generate-ar` which you can use to the run the above command.
+
+
+`autorest` generates an `npm` package (which is designed to be published), add your `autorest` client as locally using:
 
 ```
 yarn add file:./src/api/ar
 ```
 
-[Using your client](https://github.com/Azure/autorest.typescript/blob/main/docs/client/readme.md)
+Here's a basic example of calling the `/auth/me` endpoint:
+
+```typescript
+  // Autoreset client demo
+  const labsApi: LabsApi = new LabsApi();
+
+  const arCallme = async () => {
+    labsApi.get.meAuthMeGet().then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+```
+
+> For further details see their [using your client](https://github.com/Azure/autorest.typescript/blob/main/docs/client/readme.md) guide.
 
 ### [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
+`openapi-typescript-codegen` on the other hand is installed at the project level:
+
 ```
-openapi --input ./swagger.json --output ./generated
+yarn add openapi-typescript-codegen --dev
 ```
+
+You can use a `yarn` script to generate the client. The `--name` parameter is used to provide a name for the client which you use to import the client:
+
+```
+openapi --input src/api/openapi.json --output src/api/otc --name LabsApiClient
+```
+`package.json` contains a script called `generate-otc` which you can use to the run the above command.
+
+A sample usage would look as following:
+
+```typescript
+  import { LabsApiClient } from 'api/otc';
+
+  // OTC client demo
+  const otcClient = new LabsApiClient();
+
+  const otcCallMe = async () => {
+    otcClient.auth.getMeAuthMeGet().then(res => { 
+      console.log(res);
+    }).catch(err => { 
+      console.log(err);
+    });
+  };
+```
+
+> When you initialise the client you can provide a `BASE` URL prefix for your calls, this can be dynamically provided based on your deployed domain where relevant.
 
 ## Internationalization
 
