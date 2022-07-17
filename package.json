@@ -13,7 +13,6 @@
     "http-proxy-middleware": "^2.0.6",
     "i18next": "^21.8.14",
     "labsApi": "file:./src/api/ar",
-    "openapi-typescript-codegen": "^0.23.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -28,9 +27,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fetch-swagger": "curl https://localhost:3000/api/openapi.json -o src/api/swagger.json",
-    "generate-ar": "autorest --typescript --input-file=src/api/swagger.json --output-folder=src/api/ar",
-    "generate-otc": "openapi --input src/api/swagger.json --output src/api/otc --name LabsApiClient"
+    "fetch-openapi": "curl https://localhost:3000/api/openapi.json -o src/api/openapi.json",
+    "generate-ar": "autorest --typescript --input-file=src/api/openapi.json --output-folder=src/api/ar",
+    "generate-otc": "openapi --input src/api/openapi.json --output src/api/otc --name LabsApiClient"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +51,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "openapi-typescript-codegen": "^0.23.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.4"
   }
