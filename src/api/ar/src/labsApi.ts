@@ -22,25 +22,25 @@ import {
   Write,
   Root
 } from "./operationsInterfaces";
-import { LabsOptionalParams } from "./models";
+import { LabsApiOptionalParams } from "./models";
 
-export class Labs extends coreClient.ServiceClient {
+export class LabsApi extends coreClient.ServiceClient {
   $host: string;
 
   /**
-   * Initializes a new instance of the Labs class.
+   * Initializes a new instance of the LabsApi class.
    * @param options The parameter options
    */
-  constructor(options?: LabsOptionalParams) {
+  constructor(options?: LabsApiOptionalParams) {
     // Initializing default values for options
     if (!options) {
       options = {};
     }
-    const defaults: LabsOptionalParams = {
+    const defaults: LabsApiOptionalParams = {
       requestContentType: "application/json; charset=utf-8"
     };
 
-    const packageDetails = `azsdk-js-labs/1.0.0-beta.1`;
+    const packageDetails = `azsdk-js-labsApi/1.0.0-beta.1`;
     const userAgentPrefix =
       options.userAgentOptions && options.userAgentOptions.userAgentPrefix
         ? `${options.userAgentOptions.userAgentPrefix} ${packageDetails}`
