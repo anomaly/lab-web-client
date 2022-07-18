@@ -14,6 +14,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import Authentication from './views/Authentication';
 import Login from './views/Authentication/Login';
+import OTP from './views/Authentication/OTP';
 
 
 const root = ReactDOM.createRoot(
@@ -25,6 +26,7 @@ root.render(
       <Routes>
         <Route path="/auth" element={<Authentication/>}>
           <Route path="login" element={<Login/>} />
+          <Route path="otp" element={<OTP/>} />
         </Route>
         <Route path="/" element={<App />} />
       </Routes>

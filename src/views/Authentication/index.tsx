@@ -1,28 +1,29 @@
 import {
     Outlet
 } from "react-router-dom";
-import { 
-    LoginIcon, 
-    MailIcon 
-} from '@heroicons/react/outline'
 
-import Login from "./Login";
+import Header from "./Header";
+import Footer from "./Footer";
 
+/**
+ * This provides a wrapper page for the authentication pages.
+ * 
+ * The routes are defined in the index page, where all pages are 
+ * imported and wired up. The aim of this is to provide an overarching
+ * template for the authentication pages.
+ * 
+ * Refer to the use of <Outlet> in the react-router documentation.
+ * 
+ * @returns {JSX.Element}
+ */
 function Authentication() {
     return(
         <div>
-            <header className="flex items-center justify-between p-4">
-                <h1>Wattle</h1>
-                <ul  className="flex">
-                    <li className="p-4 ml-4 border-2 border-blue-100 rounded-full shadow-md">
-                        <LoginIcon className="w-6 h-6 text-blue-500"/>
-                    </li>
-                    <li className="p-4 ml-4 border-2 border-blue-100 rounded-full shadow-md">
-                        <MailIcon className="w-6 h-6 text-blue-500"/>
-                    </li>
-                </ul>
-            </header>
-            <Outlet />
+            <Header/>
+            <main>
+                <Outlet />
+            </main>
+            <Footer/>
         </div>
     );
 }
