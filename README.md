@@ -13,10 +13,10 @@ Objectives:
 - [X] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
 Standard Libraries:
-- [ ] Page routing with [React Router](https://reactrouter.com/)
+- [X] Page routing with [React Router](https://reactrouter.com/)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
 - [ ] Loading skeletons
-- [ ] React Hook Forms
+- [X] React Hook Forms
 - [ ] React Drop Zone for file upload 
 - [ ] Research and recommend animation libraries
 
@@ -208,6 +208,10 @@ The following is an evolving conversation. While there's no official pattern for
 
 - `src/components`, contain components that are truly reused around the project, if there's a particular component tied to a view then it makes more sense to keep it within the view folder.
 - `src/views`, contains views for the application. These should be grouped by function e.g authentication, dashboard.
+
+### React Router configuration
+
+`<Router>` in index page
 
 ## End-to-end testing
 
