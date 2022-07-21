@@ -12,13 +12,16 @@ Objectives:
 - [ ] End-to-end testing using [Microsoft Playwright](https://playwright.dev/)
 - [X] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
-Standard Libraries:
-- [X] Page routing with [React Router](https://reactrouter.com/)
+Standard Libraries and UI components:
+- [X] Page routing with [React Router](https://reactrouter.com/), a industry leading Router components (this is not an issue for GatsbyJS or NextJS as they ship their own)
+- [ ] [Headless UI](https://headlessui.com/), from the makers of Tailwind CSS
+- [ ] [Loading skeletons](https://github.com/buildo/react-placeholder)
+- [ ] DatePicker component, Airbnb makes available their [date component](https://airbnb.io/projects/react-dates/)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
-- [ ] Loading skeletons
 - [X] React Hook Forms
 - [ ] React Drop Zone for file upload 
-- [ ] Research and recommend animation libraries
+- [ ] Research and recommend animation libraries, e.g Framer Motion
+- [ ] [React Phone number input](react-phone-number-input/)
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Developing the client
@@ -219,6 +222,10 @@ The following is an evolving conversation. While there's no official pattern for
 
 - [mkcert](https://github.com/FiloSottile/mkcert), by [Filippo Valsorda](https://filippo.io)
 - [How to Setup HTTPS Locally with create-react-app](https://www.freecodecamp.org/news/how-to-set-up-https-locally-with-create-react-app/), by [Braedon Gough](https://twitter.com/bbbraedddon)
+
+Articles:
+
+- [Implementing Skeleton Screens In React](https://www.smashingmagazine.com/2020/04/skeleton-screens-react/) by [Blessing Krofegha](https://twitter.com/beveloper)
 
 ## License
 Contents of this repository are licensed under the Apache 2.0 license.
