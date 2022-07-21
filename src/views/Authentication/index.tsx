@@ -18,7 +18,7 @@ import Footer from "./Footer";
  */
 function Authentication() {
     return(
-        <div>
+        <div className="flex flex-col items-center justify-between w-screen h-screen">
             <Header/>
             <main>
                 <Outlet />
