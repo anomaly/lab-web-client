@@ -3,7 +3,7 @@
 @layer base {
     body {
         @apply m-0;
-        @apply bg-zinc-50;
+        @apply bg-slate-50;
     }
 }
 

@@ -47,7 +47,6 @@ function App() {
               Sign in with Email &amp; Password
             </RouterLink>
           </li>
-
         </ul>
       </nav>
     </div>
