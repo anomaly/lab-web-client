@@ -3,24 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
-    "@stripe/react-stripe-js": "^1.9.0",
-    "@stripe/stripe-js": "^1.32.0",
-    "@testing-library/jest-dom": "^5.16.4",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.35.0",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "@types/jest": "^28.1.3",
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.3",
+    "@testing-library/user-event": "^14.4.2",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.6.4",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "http-proxy-middleware": "^2.0.6",
-    "i18next": "^21.8.14",
+    "i18next": "^21.8.16",
     "labsApi": "file:./src/api/ar",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-hook-form": "^7.33.1",
-    "react-i18next": "^11.18.1",
+    "react-hook-form": "^7.34.0",
+    "react-i18next": "^11.18.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
@@ -54,9 +55,9 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.8",
     "openapi-typescript-codegen": "^0.23.0",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.8"
   }
 }
