@@ -216,6 +216,70 @@ The following is an evolving conversation. While there's no official pattern for
 
 `<Router>` in index page
 
+
+## S3 related wisdom
+
+This should ideally be done as part of a CI/CD process, but the commands are nice to have for reference and are handy for development builds.
+
+We encourage that you keep the bucket related secrets in an `.env` file, this translates directly into storing this a CI/CD environment. 
+
+> Note: the keys are secrets and should never be versioned, it's also advisable to cycle these keys from time to time.
+
+```
+ACCESS_KEY=LEGG.....
+SECRET_KEY=qUuXn.....
+BUCKET_FQDN=lab-web-client.ap-south-1.linodeobjects.com
+BUCKET_NAME=lab-web-client
+BUCKET_REGION_FQDN=ap-south-1.linodeobjects.com
+```
+
+You will need to prepare the bucket to serve static files, the `s3cmd` can help you with this:
+
+```bash
+export $(cat .env) && s3cmd 
+  --access_key=$ACCESS_KEY 
+  --secret_key=$SECRET_KEY 
+  --host=$BUCKET_REGION_FQDN 
+  --host-bucket=$BUCKET_FQDN 
+  ws-create 
+  --ws-index=index.html 
+  --ws-error=index.html 
+  s3://$BUCKET_NAME/
+```
+
+> This is a one time process, following this step the bucket should be ready to serve files.
+
+Once you've built client you can use a tool like `s3cmd` to synchronise the files to the S3 bucket.
+
+```bash
+export $(cat .env) && s3cmd 
+  --access_key=$ACCESS_KEY 
+  --secret_key=$SECRET_KEY 
+  --host=$BUCKET_REGION_FQDN 
+  --host-bucket=$BUCKET_FQDN 
+  sync 
+  --no-mime-magic 
+  --delete-removed
+  --delete-after
+  --acl-public 
+  build/* 
+  s3://$BUCKET_NAME/
+```
+
+Buckets are also required to be empty before you can drop them from the provider:
+
+```bash
+export $(cat .env) && s3cmd 
+  --access_key=$ACCESS_KEY 
+  --secret_key=$SECRET_KEY 
+  --host=$BUCKET_REGION_FQDN 
+  --host-bucket=$BUCKET_FQDN 
+  del 
+  --recusrive 
+  --force
+  s3://$BUCKET_NAME/
+```
+
 ## End-to-end testing
 
 ## References
