@@ -289,6 +289,13 @@ website_endpoint=http://%(bucket)s.website-ap-south-1.linodeobjects.com
 
 this will result in the `cli` outputting the correct URL for the bucket.
 
+```
+Bucket s3://lab-web-client/: Website configuration
+Website endpoint: http://lab-web-client.website-ap-south-1.linodeobjects.com
+Index document:   index.html
+Error document:   index.html
+```
+
 > *Note:* while the bucket's FQDN is `lab-web-client.ap-south-1.linodeobjects.com` to serve the web site you must use the generated address of `lab-web-client.website-ap-south-1.linodeobjects.com`. The FQDN is used to serve the context of the bucket _not_ a site.
 
 ## End-to-end testing
