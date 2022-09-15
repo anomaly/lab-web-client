@@ -29,7 +29,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-screen h-screen p-20 text-black app">
+    <div className="flex flex-col justify-center w-screen h-screen p-20 font-bold text-black app">
       <img
         src={AnomalyLogo}
         width={40}

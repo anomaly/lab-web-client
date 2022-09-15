@@ -1,10 +1,7 @@
 import React from 'react';
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon } from '@heroicons/react/solid';
 
 function Login() {
-
-    // regex to detect email address
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     return(
     <div className="p-8 text-gray-700 border-2 shadow-xl border-slate-200 bg-slate-50">
