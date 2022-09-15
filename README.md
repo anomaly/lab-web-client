@@ -280,6 +280,17 @@ export $(cat .env) && s3cmd
   s3://$BUCKET_NAME/
 ```
 
+If you are using an alternate Object Store like one provided by [Linode](), then you might need to provide additional context by changing the suffix values of the buckets. For example Linode buckets are suffixed with `linodeobjects.com` and the region is suffixed with the region name.
+
+Create a file called `.s3cfg` in your home directory with the following values:
+```ini
+website_endpoint=http://%(bucket)s.website-ap-south-1.linodeobjects.com
+```
+
+this will result in the `cli` outputting the correct URL for the bucket.
+
+> *Note:* while the bucket's FQDN is `lab-web-client.ap-south-1.linodeobjects.com` to serve the web site you must use the generated address of `lab-web-client.website-ap-south-1.linodeobjects.com`. The FQDN is used to serve the context of the bucket _not_ a site.
+
 ## End-to-end testing
 
 ## References
