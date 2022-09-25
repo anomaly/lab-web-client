@@ -243,7 +243,7 @@ This should ideally be done as part of a CI/CD process, but the commands are nic
 
 > Note: the keys are secrets and should never be versioned, it's also advisable to cycle these keys from time to time.
 
-```
+```ini
 ACCESS_KEY=LEGG.....
 SECRET_KEY=qUuXn.....
 BUCKET_FQDN=lab-web-client.ap-south-1.linodeobjects.com
