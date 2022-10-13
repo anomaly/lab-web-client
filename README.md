@@ -22,6 +22,7 @@ Standard Libraries and UI components:
 - [ ] React Drop Zone for file upload 
 - [ ] Research and recommend animation libraries, e.g Framer Motion
 - [ ] [React Phone number input](react-phone-number-input/)
+- [ ] Date Time parsing
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Developing the client
@@ -43,16 +44,16 @@ The intent here is run SSL (which is as close to development as possible) but wi
 [mkcert](https://github.com/FiloSottile/mkcert) allows us to provision a SSL certificate for our development environment.
 
 Install mkcert via `brew`:
-```sh
+```bash
 $ brew install mkcert
 ```
-Install nss (this is only needed if you use Firefox)
-```sh
+Install [nss](https://firefox-source-docs.mozilla.org/security/nss/index.html) (this is only needed if you use Firefox)
+```bash
 $ brew install nss
 ```
 
 Setup mkcert on your machine (this register it as a certificate authority)
-```
+```bash
 $ mkcert -install
 ```
 
@@ -68,12 +69,12 @@ Next we modify the `start` script to use SSL, this saves us having to set the `H
 ```
 
 Create .cert directory if it doesn't exist
-```
+```bash
 mkdir -p .cert
 ```
 
 Generate the certificate (ran from the root of this project)
-```
+```bash
 mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
 ```
 
