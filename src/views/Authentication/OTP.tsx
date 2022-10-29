@@ -1,5 +1,4 @@
 import React from 'react';
-import { ArrowRightIcon } from '@heroicons/react/solid';
 
 function Login() {
 
@@ -15,7 +14,6 @@ function Login() {
         <input type="tel" className="w-full px-4 py-2 my-10 text-lg font-semibold border-2 border-gray-200 rounded-md" placeholder="e.g 0499 229 339 or citizen@domain.com"></input>
         <button className="flex items-center justify-center w-full px-4 py-2 text-xl border-2 rounded-lg bg-lime-100 border-lime-300">
             <span className="mr-2">Let's go</span>
-            <ArrowRightIcon height={24} width={24} />
         </button>
     </div>);
 }
