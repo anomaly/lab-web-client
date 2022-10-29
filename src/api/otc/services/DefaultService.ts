@@ -11,11 +11,10 @@ export class DefaultService {
     /**
      * Root
      * Placeholder for the root endpoint
-     *
      * @returns any Successful Response
      * @throws ApiError
      */
-    public rootGet(): CancelablePromise<any> {
+    public root(): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/',

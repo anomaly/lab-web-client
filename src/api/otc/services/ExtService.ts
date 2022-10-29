@@ -17,7 +17,7 @@ export class ExtService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public echoExtEchoGet(): CancelablePromise<any> {
+    public echo(): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/ext/echo',
@@ -25,7 +25,7 @@ export class ExtService {
     }
 
     /**
-     * Perform Healthcheck
+     * Get Health
      * Check the health of the server.
      *
      * Purpose of this endpoint is to check the health of the server.
@@ -33,7 +33,7 @@ export class ExtService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public performHealthcheckExtHealthcheckGet(): CancelablePromise<any> {
+    public getHealth(): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/ext/healthcheck',
@@ -41,14 +41,14 @@ export class ExtService {
     }
 
     /**
-     * Write To Logger
+     * Test Logger
      * Log a message.
      *
      * Purpose of this endpoint is to log a message to the logger.
      * @returns any Successful Response
      * @throws ApiError
      */
-    public writeToLoggerExtLogGet(): CancelablePromise<any> {
+    public testLogger(): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/ext/log',
