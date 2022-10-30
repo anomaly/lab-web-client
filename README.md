@@ -147,7 +147,8 @@ While most traditional state management libraries are great for working with cli
 - Requires asynchronous APIs for fetching and updating
 - Implies shared ownership and can be changed by other people without your knowledge
 - Can potentially become "out of date" in your applications if you're not careful
-- Once you grasp the nature of server state in your application, even more challenges will arise as you go, for example:
+
+Once you grasp the nature of server state in your application, even more challenges will arise as you go, for example:
 
 - Caching... (possibly the hardest thing to do in programming)
 - Deduping multiple requests for the same data into a single request
@@ -160,7 +161,7 @@ While most traditional state management libraries are great for working with cli
 
 > **Reference**: [Motivation](https://react-query-v3.tanstack.com/overview#motivation) from the `react-query` documentation.
 
-Watch Tanner Linsley's presentation [React Query: It’s Time to Break up with your "Global State”!](Deduping https://youtu.be/seU46c6Jz7E) to get a better understanding of the problems.
+Watch Tanner Linsley's presentation [React Query: It’s Time to Break up with your "Global State"!](https://youtu.be/seU46c6Jz7E) to get a better understanding of the problems.
 
 
 [React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
