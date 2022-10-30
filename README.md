@@ -14,7 +14,6 @@ Objectives:
 
 Standard Libraries and UI components:
 - [X] Page routing with [React Router](https://reactrouter.com/), a industry leading Router components (this is not an issue for GatsbyJS or NextJS as they ship their own)
-- [ ] [Headless UI](https://headlessui.com/), from the makers of Tailwind CSS
 - [ ] [Loading skeletons](https://github.com/buildo/react-placeholder)
 - [ ] DatePicker component, Airbnb makes available their [date component](https://airbnb.io/projects/react-dates/)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
@@ -23,6 +22,8 @@ Standard Libraries and UI components:
 - [ ] Research and recommend animation libraries, e.g Framer Motion
 - [ ] [React Phone number input](react-phone-number-input/)
 - [ ] Date Time parsing
+- [ ] Addition hooks from [rooks](https://www.npmjs.com/package/rooks) 
+- [ ] [Headless UI](https://headlessui.com/), from the makers of Tailwind CSS
 
 As a general rule of thumb, we want to avoid tooling in anything we don't need to. Unless absolutely necessary we use yarn to run any scripts e.g generating OpenAPI clients.
 ## Developing the client
@@ -112,97 +113,62 @@ module.exports = function(app) {
   );
 };
 ```
+## Routing, Data Loading and State Management
 
-## Generating API Clients
+Most React developers start off using a `Router` library and in the more recent times use a `Context` to store the state of the user interface and in many instances the asynchronous data (i.e from a remote source, typically an API). As we trying and refactor the application code to separate user interface elements from data state, we often end up with issues like Deduping multiple requests (where the same request end point is called multiple times, mostly due to the state being re-initialised on paints).
 
-FastAPI has a few recommendations on [how to generate clients](https://fastapi.tiangolo.com/advanced/generate-clients/?h=) for the API. The following are options that we hve narrowed down to and provide usage guidelines for. An extremely central aim in choosing a client API generator is code readability, this is achieved by naming methods well on the server and configuring the client to generate sensible names.
+Until recently these have been three separate topics. While React does not have an opinion on a solution for this, recent developments like React Router introducing data loading in `v6.4` has had us revisit all three components in unison. 
 
-> Code readability greatly improves developer productivity
+> React Router is about *when*, data caching libs are about *what*. - [Ryan Florence](https://twitter.com/ryanflorence/status/1561731634419773447?s=20&t=Jn92zsNQwOOdKEp383-kyg)
 
-You will require the `openapi.json` file which you can fetch using `cURL`:
-```
-curl https://localhost:3000/api/openapi.json -o src/api/openapi.json
-```
+As we apply our templates to larger problems, we must now think of the most efficient patterns to handle these complex use cases. To this effect we:
 
-`package.json` contains a script called `fetch-openapi` which you can use to the run the above command.
-
-> autorest requires you to provide a fully qualified name for the API
+- Separate application UI state and asynchronous data state
+- Use `react-query` to handle caching, deduping, reflection of data
+- Use `react-router` and `react-query` in harmony
 
 
-The labs project has evaluated the following client API generators:
+### Routing and data loading
 
-### [autorest](https://github.com/azure/autorest.typescript)
+`<Router>` in index page
 
-Part of the Microsoft Azure SDK for TypeScript, autorest provides client libraries for many languages including Python. The Typescript client. `autorest can be installed via `npm` to be available globally:
-
-```
-npm install -g autorest
-```
-
-following this you should be able to generate a client using `autorest` as follows, use the `--typescript` flag to generate a Typescript client:
-
-```
-autorest --typescript --input-file=src/api/openapi.json --output-folder=src/api/ar
-```
-`package.json` contains a script called `generate-ar` which you can use to the run the above command.
+[React Route Loaders](https://reactrouter.com/en/6.4.0/route/loader) is what the `Router` uses to load data, also see [errorStates](https://reactrouter.com/en/6.4.0/route/error-element) to react to `errors` and use [actions](https://reactrouter.com/en/6.4.0/route/action) to respond to errors.
 
 
-`autorest` generates an `npm` package (which is designed to be published), add your `autorest` client as locally using:
+### API Clients
 
-```
-yarn add file:./src/api/ar
-```
+[Orval](https://orval.dev/overview)
 
-Here's a basic example of calling the `/auth/me` endpoint:
+### State Management
 
-```typescript
-  // Autoreset client demo
-  const labsApi: LabsApi = new LabsApi();
+While most traditional state management libraries are great for working with client state, they are not so great at working with async or server state. This is because server state is totally different. For starters, server state:
 
-  const arCallme = async () => {
-    labsApi.get.meAuthMeGet().then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    });
-  };
-```
+- Is persisted remotely in a location you do not control or own
+- Requires asynchronous APIs for fetching and updating
+- Implies shared ownership and can be changed by other people without your knowledge
+- Can potentially become "out of date" in your applications if you're not careful
+- Once you grasp the nature of server state in your application, even more challenges will arise as you go, for example:
 
-> For further details see their [using your client](https://github.com/Azure/autorest.typescript/blob/main/docs/client/readme.md) guide.
+- Caching... (possibly the hardest thing to do in programming)
+- Deduping multiple requests for the same data into a single request
+- Updating "out of date" data in the background
+- Knowing when data is "out of date"
+- Reflecting updates to data as quickly as possible
+- Performance optimizations like pagination and lazy loading data
+- Managing memory and garbage collection of server state
+- Memoizing query results with structural sharing
 
-### [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
+> **Reference**: [Motivation](https://react-query-v3.tanstack.com/overview#motivation) from the `react-query` documentation.
 
-`openapi-typescript-codegen` on the other hand is installed at the project level:
+Watch Tanner Linsley's presentation [React Query: It’s Time to Break up with your "Global State”!](Deduping https://youtu.be/seU46c6Jz7E) to get a better understanding of the problems.
 
-```
-yarn add openapi-typescript-codegen --dev
-```
 
-You can use a `yarn` script to generate the client. The `--name` parameter is used to provide a name for the client which you use to import the client:
+[React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
 
-```
-openapi --input src/api/openapi.json --output src/api/otc --name LabsApiClient
-```
-`package.json` contains a script called `generate-otc` which you can use to the run the above command.
+[Example](https://tanstack.com/query/v4/docs/examples/react/react-router) of how to Router and Query together.
 
-A sample usage would look as following:
+### Putting it all together
 
-```typescript
-  import { LabsApiClient } from 'api/otc';
-
-  // OTC client demo
-  const otcClient = new LabsApiClient();
-
-  const otcCallMe = async () => {
-    otcClient.auth.getMeAuthMeGet().then(res => { 
-      console.log(res);
-    }).catch(err => { 
-      console.log(err);
-    });
-  };
-```
-
-> When you initialise the client you can provide a `BASE` URL prefix for your calls, this can be dynamically provided based on your deployed domain where relevant.
 
 ### Thoughts on naming
 
@@ -228,11 +194,6 @@ The following is an evolving conversation. While there's no official pattern for
 
 - `src/components`, contain components that are truly reused around the project, if there's a particular component tied to a view then it makes more sense to keep it within the view folder.
 - `src/views`, contains views for the application. These should be grouped by function e.g authentication, dashboard.
-
-### React Router configuration
-
-`<Router>` in index page
-
 
 ## S3 Wisdom
 
