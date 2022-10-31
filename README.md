@@ -126,13 +126,15 @@ As we apply our templates to larger problems, we must now think of the most effi
 - Separate application UI state and asynchronous data state
 - Use `react-query` to handle caching, deduping, reflection of data
 - Use `react-router` and `react-query` in harmony
-
+- Use `orval` to generate the api client that can be used by `react-query`
 
 ### Routing and data loading
 
 `<Router>` in index page
 
 [React Route Loaders](https://reactrouter.com/en/6.4.0/route/loader) is what the `Router` uses to load data, also see [errorStates](https://reactrouter.com/en/6.4.0/route/error-element) to react to `errors` and use [actions](https://reactrouter.com/en/6.4.0/route/action) to respond to errors.
+
+[React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
 
 
 ### API Clients
@@ -161,10 +163,20 @@ Once you grasp the nature of server state in your application, even more challen
 
 > **Reference**: [Motivation](https://react-query-v3.tanstack.com/overview#motivation) from the `react-query` documentation.
 
-Watch Tanner Linsley's presentation [React Query: It’s Time to Break up with your "Global State"!](https://youtu.be/seU46c6Jz7E) to get a better understanding of the problems.
+We've all comes across these issues in React, or you eventually will. Tanner Linsley's presentation [React Query: It’s Time to Break up with your "Global State"!](https://youtu.be/seU46c6Jz7E) gives an overview of these issues and how `react-query` goes a long way to address them.
+
+`react-query` handles the following use cases rather well:
+- Background fetching
+- Parallel queries
+- Window focus refetching
+- Query retries
+- Paginated queries
 
 
-[React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
+Developer tools
+```ts
+ import { ReactQueryDevtools } from 'react-query/devtools'
+```
 
 [Example](https://tanstack.com/query/v4/docs/examples/react/react-router) of how to Router and Query together.
 
