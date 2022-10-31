@@ -16,7 +16,6 @@
     "@types/react-dom": "^18.0.8",
     "http-proxy-middleware": "^2.0.6",
     "i18next": "^22.0.4",
-    "labsApi": "file:./src/api/ar",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -56,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.27.1",
     "autoprefixer": "^10.4.13",
     "openapi-typescript-codegen": "^0.23.0",
     "postcss": "^8.4.18",
