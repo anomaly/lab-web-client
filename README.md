@@ -130,12 +130,69 @@ As we apply our templates to larger problems, we must now think of the most effi
 
 ### Routing and data loading
 
-`<Router>` in index page
+React Router 6.4 changes the way it's configured and introduces data loading, the two major concepts to take note of are:
 
-[React Route Loaders](https://reactrouter.com/en/6.4.0/route/loader) is what the `Router` uses to load data, also see [errorStates](https://reactrouter.com/en/6.4.0/route/error-element) to react to `errors` and use [actions](https://reactrouter.com/en/6.4.0/route/action) to respond to errors.
+- [Loaders](https://reactrouter.com/en/main/route/loader), which are async functions fired before the route is rendered
+- [Actions](https://reactrouter.com/en/main/route/action), which are async function fired from a `<Form>`
 
-[React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
+This is in attempt to provide a HTML + HTTP like with `react-router` doing the async work.
 
+A `loader` or an `action` can throw an exception which signals the `Router` to load the `errorElement`, which is meant to be a fallback components for error states.
+
+The following is a code extract to how `react-router` is configured with `react-query`, it will become clear how we are using the two libraries together. 
+
+First of all note that the router is created using the [createBrowserRouter](https://reactrouter.com/en/main/routers/create-browser-router) method which uses the DOM History API. Children are passed as an array to the routes, and it's behaviour is that of when we nested `<Route>` and used an `<Outlet>` in the parent container.
+
+```ts
+import {
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+
+import {
+    QueryClient,
+    QueryClientProvider,
+} from 'react-query'
+
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/auth",
+    element: <Authentication />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "otp",
+        element: <OTP/>
+      }
+    ]
+  }
+]);
+
+root.render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
+  </React.StrictMode>
+);
+```
+
+The `QueryClientProvider` wraps the entire application. `<ReactQueryDevtools>` injects the developer tool into the application for `react-query` and it stripped away in production builds.
+
+The `queryClient` is used to invalidate the cache, we will talk about in the next section.
+
+Further reading:
+- [React Query meets React Router](https://tkdodo.eu/blog/react-query-meets-react-router)
 
 ### API Clients
 
@@ -291,7 +348,34 @@ Error document:   index.html
 
 > *Note:* while the bucket's FQDN is `lab-web-client.ap-south-1.linodeobjects.com` to serve the web site you must use the generated address of `lab-web-client.website-ap-south-1.linodeobjects.com`. The FQDN is used to serve the context of the bucket _not_ a site.
 
-## End-to-end testing
+## End-to-end and API testing
+
+We use [Microsoft Playwright](https://playwright.dev) for end-to-end and API testing, including the use of Github actions to automate testing on pull requests. While we don't intend to replicate all the documentation here, the intent is to maintain information about the portions of the tool that we use and how we think it's best configured.
+
+To configure Playwright for the project use:
+```bash
+yarn create playwright
+```
+
+> Follow the prompts to complete installation, we generally use the default values
+
+To run the headless tests use:
+
+```bash
+npx playwright test
+```
+
+and to view reports (this will end up running a web server with with the reports displayed as a site):
+
+```bash
+npx playwright show-report
+```
+
+### Recording new tests
+
+```bash
+npx playwright codegen playwright.dev
+```
 
 ## Developer Tools
 
