@@ -203,7 +203,29 @@ Add `orval` to be globally available:
 yarn global add orval
 ```
 
+Add/modify the `orval.config.js` located on the `root` folder of the project:
 
+```
+module.exports = {
+  labs: {
+    output: {
+      mode: 'tags-split',
+      target: 'src/api/labs.ts',
+      schemas: 'src/api/models',
+      client: 'react-query',
+      mock: true,
+    },
+    input: {
+      target: './openapi.json',
+    },
+  },
+};
+```
+
+By default we place the `api` and `models in `src/api` these are split into files and grouped by the OpenAPI `tags` assigned on the server side. These are wrapped as two `yarn` scripts:
+
+- `fetch-openapi` - fetches the OpenAPI spec from the server and places it on the root
+- `codegen` - fetches the OpenAPI sepc and generates the API client
 
 ### State Management
 
