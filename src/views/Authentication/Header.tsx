@@ -8,6 +8,7 @@ function Header() {
     <header className="flex justify-between min-w-full p-6 text-gray-700">
       <img
         src={AnomalyLogo}
+        alt="Anomaly Logo"
         width={40}
         height={40}/>
       <nav className="">
