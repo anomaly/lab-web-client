@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import AnomalyLogo from 'assets/icon-anomaly.png';
 
@@ -8,6 +9,10 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center w-screen h-screen p-20 font-bold text-black app">
+      <Helmet>
+        <title>Welcome to labs</title>
+        <meta name="description" content="Welcome to labs" />
+      </Helmet>
       <img
         src={AnomalyLogo}
         alt="Anomaly Logo"
