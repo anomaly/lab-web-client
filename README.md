@@ -205,7 +205,7 @@ yarn global add orval
 
 Add/modify the `orval.config.js` located on the `root` folder of the project:
 
-```
+```ts
 module.exports = {
   labs: {
     output: {
@@ -222,7 +222,7 @@ module.exports = {
 };
 ```
 
-By default we place the `api` and `models in `src/api` these are split into files and grouped by the OpenAPI `tags` assigned on the server side. These are wrapped as two `yarn` scripts:
+By default we place the `api` and `models` in `src/api` these are split into files and grouped by the OpenAPI `tags` assigned on the server side. These are wrapped as two `yarn` scripts:
 
 - `fetch-openapi` - fetches the OpenAPI spec from the server and places it on the root
 - `codegen` - fetches the OpenAPI sepc and generates the API client
