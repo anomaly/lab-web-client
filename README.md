@@ -196,7 +196,14 @@ Further reading:
 
 ### API Clients
 
-[Orval](https://orval.dev/overview)
+Before we get into how we use configure and use `react-query` and `react-router` loaders together, lets meet [Orval](https://orval.dev/overview), the API client generator. Orval does way more than just generate a type checked API client, but for the purposes of this guide we will focus on the API client portion.
+
+Add `orval` to be globally available:
+```bash
+yarn global add orval
+```
+
+
 
 ### State Management
 

@@ -32,8 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fetch-openapi": "curl https://localhost:3000/api/openapi.json -o src/api/openapi.json",
-    "codegen": "",
+    "fetch-openapi": "curl https://localhost:3000/api/openapi.json -o openapi.json",
+    "codegen": "curl https://localhost:3000/api/openapi.json -o openapi.json && orval",
     "sync": "export $(cat .env) && s3cmd --access_key=$ACCESS_KEY --secret_key=$SECRET_KEY --host=$BUCKET_REGION_FQDN --host-bucket=$BUCKET_FQDN sync --no-mime-magic --acl-public --delete-removed --delete-after build/* s3://$BUCKET_NAME/"
   },
   "eslintConfig": {
