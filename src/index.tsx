@@ -1,36 +1,63 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import {
-  BrowserRouter,
-  Routes,
-  Route,
+  RouterProvider,
+  createBrowserRouter,
 } from "react-router-dom";
+
+import {
+    QueryClient,
+    QueryClientProvider,
+} from 'react-query'
+
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import './i18n';
-
-import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 import Authentication from './views/Authentication';
 import Login from './views/Authentication/Login';
 import OTP from './views/Authentication/OTP';
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/auth",
+    element: <Authentication />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "otp",
+        element: <OTP/>
+      }
+    ]
+  }
+]);
+
+/**
+ * 
+ */
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/auth" element={<Authentication/>}>
-          <Route path="login" element={<Login/>} />
-          <Route path="otp" element={<OTP/>} />
-        </Route>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
