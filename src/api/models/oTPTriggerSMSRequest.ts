@@ -21,6 +21,12 @@ This class is used to define the base model for all schema
 that we use in the Application, it configures pydantic to
 translate between camcelCase and snake_case for the JSON
 amongst other default settings.
+
+ORM mode will allow pydantic to translate SQLAlchemy results
+into serializable models.
+
+For a full set of options, see:
+https://pydantic-docs.helpmanual.io/usage/model_config/
  */
 export interface OTPTriggerSMSRequest {
   mobileNumber: string;

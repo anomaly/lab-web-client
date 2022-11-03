@@ -18,8 +18,11 @@ aim of the project is:
  * User profile 
     
  */
-export interface UserRequest {
-  email?: string;
+export interface UserResponse {
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+  email: string;
   mobileNumber?: string;
   verified: boolean;
   firstName?: string;

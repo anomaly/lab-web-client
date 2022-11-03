@@ -14,14 +14,4 @@ aim of the project is:
  * OpenAPI spec version: 0.1.0
  */
 
-/**
- * User profile 
-    
- */
-export interface UserRequest {
-  email?: string;
-  mobileNumber?: string;
-  verified: boolean;
-  firstName?: string;
-  lastName?: string;
-}
+export type GetUsersParams = { next_id?: string; limit?: number };
