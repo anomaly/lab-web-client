@@ -18,6 +18,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import './i18n';
 
+import ErrorPage from 'error-page';
 import App from './App';
 import Authentication from './views/Authentication';
 import Login from './views/Authentication/Login';
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/auth",
