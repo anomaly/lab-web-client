@@ -20,9 +20,9 @@ import './i18n';
 
 import ErrorPage from 'error-page';
 import App from './App';
-import Authentication from './views/Authentication';
-import Login from './views/Authentication/Login';
-import OTP from './views/Authentication/OTP';
+import Authentication from './routers/auth';
+import Login from './routers/auth/login';
+import OTP from './routers/auth/otp';
 
 const router = createBrowserRouter([
   {

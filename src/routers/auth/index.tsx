@@ -2,8 +2,8 @@ import {
     Outlet
 } from "react-router-dom";
 
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./header";
+import Footer from "./footer";
 
 /**
  * This provides a wrapper page for the authentication pages.

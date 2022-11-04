@@ -1,6 +1,10 @@
 import { useRouteError } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
+/**
+ * 
+ * @returns JSX.Element
+ */
 function ErrorPage() {
 
     const error = useRouteError();
