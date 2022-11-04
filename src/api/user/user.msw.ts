@@ -22,6 +22,14 @@ import {
 
 export const getGetUsersWithLimitsMock = () => (Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})))
 
+export const getCreateUserMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
+
+export const getGetUsersMock = () => (Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})))
+
+export const getGetUserByIdMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
+
+export const getUpdateUserMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
+
 export const getUserMSW = () => [
 rest.get('*/users', (_req, res, ctx) => {
         return res(
@@ -33,16 +41,19 @@ ctx.json(getGetUsersWithLimitsMock()),
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getCreateUserMock()),
         )
       }),rest.get('*/users/infinite', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getGetUsersMock()),
         )
       }),rest.get('*/users/:id', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getGetUserByIdMock()),
         )
       }),rest.delete('*/users/:id', (_req, res, ctx) => {
         return res(
@@ -53,5 +64,6 @@ ctx.json(getGetUsersWithLimitsMock()),
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getUpdateUserMock()),
         )
       }),]

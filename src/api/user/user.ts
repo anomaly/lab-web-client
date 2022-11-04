@@ -35,7 +35,9 @@ import type {
   UserResponse,
   HTTPValidationError,
   GetUsersWithLimitsParams,
-  GetUsersParams
+  UserRequest,
+  GetUsersParams,
+  DeleteUserParams
 } from '.././models'
 
 
@@ -80,45 +82,47 @@ export const useGetUsersWithLimits = <TData = Awaited<ReturnType<typeof getUsers
 }
 
 /**
+ * Creates a new user based on
  * @summary Create a new user
  */
 export const createUser = (
-     options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+    userRequest: UserRequest, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<UserResponse>> => {
     return axios.post(
-      `/users`,undefined,options
+      `/users`,
+      userRequest,options
     );
   }
 
 
 
     export type CreateUserMutationResult = NonNullable<Awaited<ReturnType<typeof createUser>>>
-    
-    export type CreateUserMutationError = AxiosError<unknown>
+    export type CreateUserMutationBody = UserRequest
+    export type CreateUserMutationError = AxiosError<HTTPValidationError>
 
-    export const useCreateUser = <TError = AxiosError<unknown>,
-    TVariables = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createUser>>, TError,TVariables, TContext>, axios?: AxiosRequestConfig}
+    export const useCreateUser = <TError = AxiosError<HTTPValidationError>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createUser>>, TError,{data: UserRequest}, TContext>, axios?: AxiosRequestConfig}
 ) => {
       const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createUser>>, TVariables> = () => {
-          
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createUser>>, {data: UserRequest}> = (props) => {
+          const {data} = props ?? {};
 
-          return  createUser(axiosOptions)
+          return  createUser(data,axiosOptions)
         }
 
-      return useMutation<Awaited<ReturnType<typeof createUser>>, TError, TVariables, TContext>(mutationFn, mutationOptions)
+      return useMutation<Awaited<ReturnType<typeof createUser>>, TError, {data: UserRequest}, TContext>(mutationFn, mutationOptions)
     }
     /**
  * @summary Get all users
  */
 export const getUsers = (
     params?: GetUsersParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+ ): Promise<AxiosResponse<UserResponse[]>> => {
     return axios.get(
       `/users/infinite`,{
     ...options,
@@ -154,11 +158,12 @@ export const useGetUsers = <TData = Awaited<ReturnType<typeof getUsers>>, TError
 }
 
 /**
+ * Get a user by their id
  * @summary Get a particular user
  */
 export const getUserById = (
     id: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+ ): Promise<AxiosResponse<UserResponse>> => {
     return axios.get(
       `/users/${id}`,options
     );
@@ -192,13 +197,21 @@ export const useGetUserById = <TData = Awaited<ReturnType<typeof getUserById>>, 
 }
 
 /**
+ * Delete a user from the database
+
+The endpoint will look to see if the user exists, and if so
+will attempt to delete the user from the database and
+return a 204 response. If the user does not exist, a 404
  * @summary Delete a particular user
  */
 export const deleteUser = (
-    id: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+    id: string,
+    params?: DeleteUserParams, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<void>> => {
     return axios.delete(
-      `/users/${id}`,options
+      `/users/${id}`,{
+    ...options,
+        params: {...params, ...options?.params},}
     );
   }
 
@@ -210,53 +223,55 @@ export const deleteUser = (
 
     export const useDeleteUser = <TError = AxiosError<HTTPValidationError>,
     
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteUser>>, TError,{id: string}, TContext>, axios?: AxiosRequestConfig}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteUser>>, TError,{id: string;params?: DeleteUserParams}, TContext>, axios?: AxiosRequestConfig}
 ) => {
       const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteUser>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteUser>>, {id: string;params?: DeleteUserParams}> = (props) => {
+          const {id,params} = props ?? {};
 
-          return  deleteUser(id,axiosOptions)
+          return  deleteUser(id,params,axiosOptions)
         }
 
-      return useMutation<Awaited<ReturnType<typeof deleteUser>>, TError, {id: string}, TContext>(mutationFn, mutationOptions)
+      return useMutation<Awaited<ReturnType<typeof deleteUser>>, TError, {id: string;params?: DeleteUserParams}, TContext>(mutationFn, mutationOptions)
     }
     /**
  * @summary Update a particular user
  */
 export const updateUser = (
-    id: string, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+    id: string,
+    userRequest: UserRequest, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<UserResponse>> => {
     return axios.patch(
-      `/users/${id}`,undefined,options
+      `/users/${id}`,
+      userRequest,options
     );
   }
 
 
 
     export type UpdateUserMutationResult = NonNullable<Awaited<ReturnType<typeof updateUser>>>
-    
+    export type UpdateUserMutationBody = UserRequest
     export type UpdateUserMutationError = AxiosError<HTTPValidationError>
 
     export const useUpdateUser = <TError = AxiosError<HTTPValidationError>,
     
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateUser>>, TError,{id: string}, TContext>, axios?: AxiosRequestConfig}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateUser>>, TError,{id: string;data: UserRequest}, TContext>, axios?: AxiosRequestConfig}
 ) => {
       const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateUser>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateUser>>, {id: string;data: UserRequest}> = (props) => {
+          const {id,data} = props ?? {};
 
-          return  updateUser(id,axiosOptions)
+          return  updateUser(id,data,axiosOptions)
         }
 
-      return useMutation<Awaited<ReturnType<typeof updateUser>>, TError, {id: string}, TContext>(mutationFn, mutationOptions)
+      return useMutation<Awaited<ReturnType<typeof updateUser>>, TError, {id: string;data: UserRequest}, TContext>(mutationFn, mutationOptions)
     }
     

@@ -47,7 +47,11 @@ const router = createBrowserRouter([
 ]);
 
 /**
+ * QueryClient is what react-query uses to manage the cache
+ * and the state of the queries.
  * 
+ * This requires to be passed to react-router loaders and
+ * actions for them to work with.
  */
 const queryClient = new QueryClient();
 

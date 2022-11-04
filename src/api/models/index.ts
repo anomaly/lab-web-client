@@ -1,4 +1,5 @@
 export * from './authResponse';
+export * from './deleteUserParams';
 export * from './getUsersParams';
 export * from './getUsersWithLimitsParams';
 export * from './hTTPValidationError';
