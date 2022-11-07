@@ -14,6 +14,7 @@ import {
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import reportWebVitals from './reportWebVitals';
+import Axios from 'axios';
 
 import './index.css';
 import './i18n';
@@ -23,6 +24,11 @@ import App from './App';
 import Authentication from './routers/auth';
 import Login from './routers/auth/login';
 import OTP from './routers/auth/otp';
+import AdminContainer from 'routers/admin/users';
+import UserAdminIndex from 'routers/admin/users/index';
+
+// Set a base URL
+Axios.defaults.baseURL = '/api/';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +49,17 @@ const router = createBrowserRouter([
         element: <OTP/>
       }
     ]
+  },
+  {
+    path: "/admin",
+    element: <AdminContainer/>,
+    children: [
+      {
+        path: "users",
+        element: <UserAdminIndex/>,
+      }
+    ]
+
   }
 ]);
 
