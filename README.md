@@ -299,6 +299,18 @@ Further reading:
 
 ### Putting it all together
 
+To make relative links just go
+
+```
+<Link to={`users/${user.id}`}>Edit</Link>
+```
+
+Form is a wrapper provided by `react-router`
+
+Questions:
+- Example uses `useLoader` in the editor screen to load data, but I am using `useGetUserById` which is an `orval` thing, is this correct
+- Examples use `{user?.firstName}` where as I am having to do `{user?.data.firstName}`, where am I going wrong?
+
 
 ### Thoughts on naming, using operation IDs
 
