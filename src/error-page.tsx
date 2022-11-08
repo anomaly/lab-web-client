@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 /**
@@ -7,19 +7,17 @@ import { Helmet } from "react-helmet";
  */
 function ErrorPage() {
 
-    const error = useRouteError();
-    console.error(error);
+    const error : any = useRouteError();
   
     return (
-      <div id="error-page">
+      <main id="error-page" className="flex flex-col items-center justify-center w-screen h-screen">
         <Helmet>
-          <title>Error</title>
+          <title>{error.statusText || error.message}</title>
         </Helmet>
-        <h1>Oops!</h1>
+        <h1 className="mb-10 text-6xl font-semibold">Oops!</h1>
         <p>Sorry, an unexpected error has occurred.</p>
-        <p>
-        </p>
-      </div>
+        <p>{error.statusText || error.message}</p>
+      </main>
     );
 }
 

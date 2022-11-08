@@ -24,44 +24,19 @@ import App from './App';
 import Authentication from './routers/auth';
 import Login from './routers/auth/login';
 import OTP from './routers/auth/otp';
-import AdminContainer from 'routers/admin/users';
-import UserAdminIndex from 'routers/admin/users/index';
+
+import AdminContainer from 'routers/admin';
+import UserAdminIndex, {
+  loader as userLoader
+} from 'routers/admin/users/index';
+
+import UserEditor, {
+  loader as userEditorLoader,
+  action as userUpdateAction
+} from 'routers/admin/users/edit';
 
 // Set a base URL
 Axios.defaults.baseURL = '/api/';
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/auth",
-    element: <Authentication />,
-    children: [
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "otp",
-        element: <OTP/>
-      }
-    ]
-  },
-  {
-    path: "/admin",
-    element: <AdminContainer/>,
-    children: [
-      {
-        path: "users",
-        element: <UserAdminIndex/>,
-      }
-    ]
-
-  }
-]);
 
 /**
  * QueryClient is what react-query uses to manage the cache
@@ -70,7 +45,39 @@ const router = createBrowserRouter([
  * This requires to be passed to react-router loaders and
  * actions for them to work with.
  */
-const queryClient = new QueryClient();
+ const queryClient = new QueryClient();
+
+ /**
+  * Router
+  */
+const router = createBrowserRouter([
+{
+  path: "/",
+  element: <App />,
+  errorElement: <ErrorPage />,
+},
+{
+  path: "admin",
+  element: <AdminContainer />,
+  children: [
+  {
+    path: "users",
+    loader: userLoader(queryClient),
+    children: [
+    {
+      path: "",
+      element: <UserAdminIndex />,
+      index: true
+    },
+    {
+      path: ":id/edit",
+      element: <UserEditor />,
+      loader: userEditorLoader(queryClient),
+      action: userUpdateAction(queryClient)
+    }]
+  }]
+}
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
