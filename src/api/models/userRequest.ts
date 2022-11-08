@@ -21,7 +21,6 @@ aim of the project is:
 export interface UserRequest {
   email?: string;
   mobileNumber?: string;
-  verified: boolean;
   firstName?: string;
   lastName?: string;
 }

@@ -36,8 +36,7 @@ import type {
   HTTPValidationError,
   GetUsersWithLimitsParams,
   UserRequest,
-  GetUsersParams,
-  DeleteUserParams
+  GetUsersParams
 } from '.././models'
 
 
@@ -205,13 +204,10 @@ return a 204 response. If the user does not exist, a 404
  * @summary Delete a particular user
  */
 export const deleteUser = (
-    id: string,
-    params?: DeleteUserParams, options?: AxiosRequestConfig
+    id: string, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<void>> => {
     return axios.delete(
-      `/users/${id}`,{
-    ...options,
-        params: {...params, ...options?.params},}
+      `/users/${id}`,options
     );
   }
 
@@ -223,20 +219,20 @@ export const deleteUser = (
 
     export const useDeleteUser = <TError = AxiosError<HTTPValidationError>,
     
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteUser>>, TError,{id: string;params?: DeleteUserParams}, TContext>, axios?: AxiosRequestConfig}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteUser>>, TError,{id: string}, TContext>, axios?: AxiosRequestConfig}
 ) => {
       const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteUser>>, {id: string;params?: DeleteUserParams}> = (props) => {
-          const {id,params} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteUser>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
 
-          return  deleteUser(id,params,axiosOptions)
+          return  deleteUser(id,axiosOptions)
         }
 
-      return useMutation<Awaited<ReturnType<typeof deleteUser>>, TError, {id: string;params?: DeleteUserParams}, TContext>(mutationFn, mutationOptions)
+      return useMutation<Awaited<ReturnType<typeof deleteUser>>, TError, {id: string}, TContext>(mutationFn, mutationOptions)
     }
     /**
  * @summary Update a particular user
@@ -244,7 +240,7 @@ export const deleteUser = (
 export const updateUser = (
     id: string,
     userRequest: UserRequest, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<UserResponse>> => {
+ ): Promise<AxiosResponse<unknown>> => {
     return axios.patch(
       `/users/${id}`,
       userRequest,options

@@ -28,8 +28,6 @@ export const getGetUsersMock = () => (Array.from({ length: faker.datatype.number
 
 export const getGetUserByIdMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
 
-export const getUpdateUserMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
-
 export const getUserMSW = () => [
 rest.get('*/users', (_req, res, ctx) => {
         return res(
@@ -64,6 +62,5 @@ ctx.json(getGetUserByIdMock()),
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
-ctx.json(getUpdateUserMock()),
         )
       }),]

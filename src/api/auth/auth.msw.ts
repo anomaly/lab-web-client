@@ -28,7 +28,7 @@ export const getLoginUserMock = () => ({accessToken: faker.random.word(), refres
 
 export const getRefreshJwtTokenMock = () => ({accessToken: faker.random.word(), refreshToken: faker.random.word(), tokenType: faker.random.word(), expiresIn: faker.datatype.number({min: undefined, max: undefined})})
 
-export const getGetMeMock = () => ({email: faker.helpers.arrayElement([faker.random.word(), undefined]), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
+export const getGetMeMock = () => ({email: faker.helpers.arrayElement([faker.random.word(), undefined]), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
 
 export const getAuthMSW = () => [
 rest.post('*/auth/signup', (_req, res, ctx) => {
