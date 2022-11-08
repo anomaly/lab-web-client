@@ -35,6 +35,10 @@ import UserEditor, {
   action as userUpdateAction
 } from 'routers/admin/users/edit';
 
+import UserCreator, {
+  action as userCreateAction
+} from 'routers/admin/users/new';
+
 // Set a base URL
 Axios.defaults.baseURL = '/api/';
 
@@ -68,6 +72,11 @@ const router = createBrowserRouter([
       path: "",
       element: <UserAdminIndex />,
       index: true
+    },
+    {
+      path: "new",
+      element: <UserCreator />,
+      action: userCreateAction(queryClient)
     },
     {
       path: ":id/edit",
