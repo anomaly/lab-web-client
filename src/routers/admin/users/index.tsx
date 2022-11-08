@@ -1,5 +1,6 @@
 import {
-    Link
+    Link,
+    Form
 } from 'react-router-dom';
 
 import {
@@ -62,11 +63,22 @@ function AdminContainer() {
             <li key={user.id}>
                 <div>{user.firstName} {user.lastName}</div>
                 <Link to={`${user.id}/edit`}>Edit</Link>
-                <Link to={`${user.id}`}>Delete</Link>
+                <Form
+                method="post"
+                action={`${user.id}/destroy`}
+                onSubmit={(event) => {
+                  // eslint-disable-next-line no-restricted-globals
+                  if (!confirm("Please confirm you want to delete this record.")) {
+                    event.preventDefault();
+                  }
+                }}>
+                  <button type="submit">Delete</button>
+                </Form>
             </li>
             ))}
             </ul>
             <Link to="/admin/users/new">New User</Link>
+            
         </div>
     );
 }

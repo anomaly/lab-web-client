@@ -39,6 +39,10 @@ import UserCreator, {
   action as userCreateAction
 } from 'routers/admin/users/new';
 
+import {
+  action as destroyUserAction
+} from 'routers/admin/users/destroy';
+
 // Set a base URL
 Axios.defaults.baseURL = '/api/';
 
@@ -83,6 +87,11 @@ const router = createBrowserRouter([
       element: <UserEditor />,
       loader: userEditorLoader(queryClient),
       action: userUpdateAction(queryClient)
+    },
+    {
+      path: ":id/destroy",
+      element: <UserEditor />,
+      action: destroyUserAction(queryClient)
     }]
   }]
 }
