@@ -78,7 +78,7 @@ function AdminContainer() {
             ))}
             </ul>
             <Link to="/admin/users/new">New User</Link>
-            
+            <Link to="/auth/login">Login</Link>
         </div>
     );
 }

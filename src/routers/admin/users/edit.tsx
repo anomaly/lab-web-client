@@ -9,6 +9,7 @@ import {
     updateUser
 } from 'api/user/user';
 import { UserRequest } from 'api/models';
+import { Helmet } from 'react-helmet';
 
 export const loader = 
     (queryClient: QueryClient) => 
@@ -35,7 +36,10 @@ function UserEditor() {
 
     return(
         <div>
-            <Form method="post" id="update-user">
+            <Helmet>
+                <title>Edit User</title>
+            </Helmet>
+            <Form method="patch" id="update-user">
                 <span>First name</span>
                 <input
                 placeholder="First"
