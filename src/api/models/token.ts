@@ -15,10 +15,12 @@ aim of the project is:
  */
 
 /**
- * A simple request to sign up a user with an email and password    
+ * A model that represents a JWT token
+
+
     
  */
-export interface SignupRequest {
-  password: string;
-  email: string;
+export interface Token {
+  access_token: string;
+  token_type: string;
 }

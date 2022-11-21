@@ -16,6 +16,11 @@ aim of the project is:
 import {
   rest
 } from 'msw'
+import {
+  faker
+} from '@faker-js/faker'
+
+export const getGetHealthMock = () => ({all_ok: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), db_ok: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), queue_ok: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), log_ok: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), timestamp: faker.helpers.arrayElement([`${faker.date.past().toISOString().split('.')[0]}Z`, undefined])})
 
 export const getExtMSW = () => [
 rest.get('*/ext/echo', (_req, res, ctx) => {
@@ -27,6 +32,7 @@ rest.get('*/ext/echo', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getGetHealthMock()),
         )
       }),rest.get('*/ext/log', (_req, res, ctx) => {
         return res(

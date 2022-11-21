@@ -46,7 +46,7 @@ export const initiateOtpEmail = (
     oTPTriggerEmailRequest: OTPTriggerEmailRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<OTPTriggerResponse>> => {
     return axios.post(
-      `/auth/otp/initiate/email`,
+      `/otp/initiate/email`,
       oTPTriggerEmailRequest,options
     );
   }
@@ -85,7 +85,7 @@ export const initiateOtpSms = (
     oTPTriggerSMSRequest: OTPTriggerSMSRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<OTPTriggerResponse>> => {
     return axios.post(
-      `/auth/otp/initiate/sms`,
+      `/otp/initiate/sms`,
       oTPTriggerSMSRequest,options
     );
   }
@@ -121,7 +121,7 @@ export const verifyOtp = (
     oTPVerifyRequest: OTPVerifyRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<unknown>> => {
     return axios.post(
-      `/auth/otp/verify`,
+      `/otp/verify`,
       oTPVerifyRequest,options
     );
   }

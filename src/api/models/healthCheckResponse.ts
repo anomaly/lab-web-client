@@ -14,11 +14,10 @@ aim of the project is:
  * OpenAPI spec version: 0.1.0
  */
 
-/**
- * A simple request to sign up a user with an email and password    
-    
- */
-export interface SignupRequest {
-  password: string;
-  email: string;
+export interface HealthCheckResponse {
+  all_ok?: boolean;
+  db_ok?: boolean;
+  queue_ok?: boolean;
+  log_ok?: boolean;
+  timestamp?: string;
 }

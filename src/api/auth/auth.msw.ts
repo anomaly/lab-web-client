@@ -24,58 +24,58 @@ export const getInitiateOtpEmailMock = () => ({success: faker.datatype.boolean()
 
 export const getInitiateOtpSmsMock = () => ({success: faker.datatype.boolean()})
 
-export const getLoginUserMock = () => ({accessToken: faker.random.word(), refreshToken: faker.random.word(), tokenType: faker.random.word(), expiresIn: faker.datatype.number({min: undefined, max: undefined})})
+export const getLoginForAuthTokenMock = () => ({access_token: faker.random.word(), token_type: faker.random.word()})
 
-export const getRefreshJwtTokenMock = () => ({accessToken: faker.random.word(), refreshToken: faker.random.word(), tokenType: faker.random.word(), expiresIn: faker.datatype.number({min: undefined, max: undefined})})
+export const getRefreshJwtTokenMock = () => ({access_token: faker.random.word(), token_type: faker.random.word()})
 
-export const getGetMeMock = () => ({email: faker.helpers.arrayElement([faker.random.word(), undefined]), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
+export const getGetMeMock = () => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, updatedAt: `${faker.date.past().toISOString().split('.')[0]}Z`, id: faker.datatype.uuid(), email: faker.random.word(), mobileNumber: faker.helpers.arrayElement([faker.random.word(), undefined]), verified: faker.datatype.boolean(), firstName: faker.helpers.arrayElement([faker.random.word(), undefined]), lastName: faker.helpers.arrayElement([faker.random.word(), undefined])})
 
 export const getAuthMSW = () => [
-rest.post('*/auth/signup', (_req, res, ctx) => {
+rest.post('*/signup', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
         )
-      }),rest.get('*/auth/verify', (_req, res, ctx) => {
+      }),rest.get('*/verify', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
         )
-      }),rest.post('*/auth/otp/initiate/email', (_req, res, ctx) => {
+      }),rest.post('*/otp/initiate/email', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getInitiateOtpEmailMock()),
         )
-      }),rest.post('*/auth/otp/initiate/sms', (_req, res, ctx) => {
+      }),rest.post('*/otp/initiate/sms', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getInitiateOtpSmsMock()),
         )
-      }),rest.post('*/auth/otp/verify', (_req, res, ctx) => {
+      }),rest.post('*/otp/verify', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
         )
-      }),rest.post('*/auth/login', (_req, res, ctx) => {
+      }),rest.post('*/token', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
-ctx.json(getLoginUserMock()),
+ctx.json(getLoginForAuthTokenMock()),
         )
-      }),rest.post('*/auth/refresh', (_req, res, ctx) => {
+      }),rest.post('*/refresh', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getRefreshJwtTokenMock()),
         )
-      }),rest.post('*/auth/logout', (_req, res, ctx) => {
+      }),rest.post('*/logout', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
         )
-      }),rest.get('*/auth/me', (_req, res, ctx) => {
+      }),rest.get('*/me', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),

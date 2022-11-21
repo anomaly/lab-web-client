@@ -19,8 +19,8 @@ aim of the project is:
     
  */
 export interface UserRequest {
-  email?: string;
-  mobileNumber?: string;
-  firstName?: string;
-  lastName?: string;
+  email: string;
+  mobileNumber: string;
+  firstName: string;
+  lastName: string;
 }

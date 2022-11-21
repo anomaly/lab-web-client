@@ -14,11 +14,11 @@ aim of the project is:
  * OpenAPI spec version: 0.1.0
  */
 
-/**
- * A simple request to sign up a user with an email and password    
-    
- */
-export interface SignupRequest {
+export interface BodyLoginForAuthTokenTokenPost {
+  grant_type?: string;
+  username: string;
   password: string;
-  email: string;
+  scope?: string;
+  client_id?: string;
+  client_secret?: string;
 }

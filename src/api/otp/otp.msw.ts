@@ -25,19 +25,19 @@ export const getInitiateOtpEmailMock = () => ({success: faker.datatype.boolean()
 export const getInitiateOtpSmsMock = () => ({success: faker.datatype.boolean()})
 
 export const getOtpMSW = () => [
-rest.post('*/auth/otp/initiate/email', (_req, res, ctx) => {
+rest.post('*/otp/initiate/email', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getInitiateOtpEmailMock()),
         )
-      }),rest.post('*/auth/otp/initiate/sms', (_req, res, ctx) => {
+      }),rest.post('*/otp/initiate/sms', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getInitiateOtpSmsMock()),
         )
-      }),rest.post('*/auth/otp/verify', (_req, res, ctx) => {
+      }),rest.post('*/otp/verify', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),

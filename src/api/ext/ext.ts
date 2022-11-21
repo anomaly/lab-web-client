@@ -28,6 +28,9 @@ import type {
   UseQueryResult,
   QueryKey
 } from 'react-query'
+import type {
+  HealthCheckResponse
+} from '.././models'
 
 
 /**
@@ -81,7 +84,7 @@ We check for connection to the database, queue and logger
  */
 export const getHealth = (
      options?: AxiosRequestConfig
- ): Promise<AxiosResponse<unknown>> => {
+ ): Promise<AxiosResponse<HealthCheckResponse>> => {
     return axios.get(
       `/ext/healthcheck`,options
     );

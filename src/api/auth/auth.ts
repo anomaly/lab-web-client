@@ -38,9 +38,9 @@ import type {
   OTPTriggerEmailRequest,
   OTPTriggerSMSRequest,
   OTPVerifyRequest,
-  AuthResponse,
-  PasswordLoginRequest,
-  UserRequest
+  Token,
+  BodyLoginForAuthTokenTokenPost,
+  UserResponse
 } from '.././models'
 
 
@@ -51,7 +51,7 @@ export const signupUser = (
     signupRequest: SignupRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<unknown>> => {
     return axios.post(
-      `/auth/signup`,
+      `/signup`,
       signupRequest,options
     );
   }
@@ -87,12 +87,12 @@ export const verifyUser = (
      options?: AxiosRequestConfig
  ): Promise<AxiosResponse<unknown>> => {
     return axios.get(
-      `/auth/verify`,options
+      `/verify`,options
     );
   }
 
 
-export const getVerifyUserQueryKey = () => [`/auth/verify`];
+export const getVerifyUserQueryKey = () => [`/verify`];
 
     
 export type VerifyUserQueryResult = NonNullable<Awaited<ReturnType<typeof verifyUser>>>
@@ -129,7 +129,7 @@ export const initiateOtpEmail = (
     oTPTriggerEmailRequest: OTPTriggerEmailRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<OTPTriggerResponse>> => {
     return axios.post(
-      `/auth/otp/initiate/email`,
+      `/otp/initiate/email`,
       oTPTriggerEmailRequest,options
     );
   }
@@ -168,7 +168,7 @@ export const initiateOtpSms = (
     oTPTriggerSMSRequest: OTPTriggerSMSRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<OTPTriggerResponse>> => {
     return axios.post(
-      `/auth/otp/initiate/sms`,
+      `/otp/initiate/sms`,
       oTPTriggerSMSRequest,options
     );
   }
@@ -204,7 +204,7 @@ export const verifyOtp = (
     oTPVerifyRequest: OTPVerifyRequest, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<unknown>> => {
     return axios.post(
-      `/auth/otp/verify`,
+      `/otp/verify`,
       oTPVerifyRequest,options
     );
   }
@@ -234,40 +234,54 @@ export const verifyOtp = (
     }
     /**
  * Attempt to authenticate a user and issue JWT token
- * @summary  Provides an endpoint for login via email and password
-  
+ * @summary Provides an endpoint for login via email and password
  */
-export const loginUser = (
-    passwordLoginRequest: PasswordLoginRequest, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<AuthResponse>> => {
+export const loginForAuthToken = (
+    bodyLoginForAuthTokenTokenPost: BodyLoginForAuthTokenTokenPost, options?: AxiosRequestConfig
+ ): Promise<AxiosResponse<Token>> => {const formUrlEncoded = new URLSearchParams();
+if(bodyLoginForAuthTokenTokenPost.grant_type !== undefined) {
+ formUrlEncoded.append('grant_type', bodyLoginForAuthTokenTokenPost.grant_type)
+ }
+formUrlEncoded.append('username', bodyLoginForAuthTokenTokenPost.username)
+formUrlEncoded.append('password', bodyLoginForAuthTokenTokenPost.password)
+if(bodyLoginForAuthTokenTokenPost.scope !== undefined) {
+ formUrlEncoded.append('scope', bodyLoginForAuthTokenTokenPost.scope)
+ }
+if(bodyLoginForAuthTokenTokenPost.client_id !== undefined) {
+ formUrlEncoded.append('client_id', bodyLoginForAuthTokenTokenPost.client_id)
+ }
+if(bodyLoginForAuthTokenTokenPost.client_secret !== undefined) {
+ formUrlEncoded.append('client_secret', bodyLoginForAuthTokenTokenPost.client_secret)
+ }
+
     return axios.post(
-      `/auth/login`,
-      passwordLoginRequest,options
+      `/token`,
+      formUrlEncoded,options
     );
   }
 
 
 
-    export type LoginUserMutationResult = NonNullable<Awaited<ReturnType<typeof loginUser>>>
-    export type LoginUserMutationBody = PasswordLoginRequest
-    export type LoginUserMutationError = AxiosError<HTTPValidationError>
+    export type LoginForAuthTokenMutationResult = NonNullable<Awaited<ReturnType<typeof loginForAuthToken>>>
+    export type LoginForAuthTokenMutationBody = BodyLoginForAuthTokenTokenPost
+    export type LoginForAuthTokenMutationError = AxiosError<HTTPValidationError>
 
-    export const useLoginUser = <TError = AxiosError<HTTPValidationError>,
+    export const useLoginForAuthToken = <TError = AxiosError<HTTPValidationError>,
     
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof loginUser>>, TError,{data: PasswordLoginRequest}, TContext>, axios?: AxiosRequestConfig}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof loginForAuthToken>>, TError,{data: BodyLoginForAuthTokenTokenPost}, TContext>, axios?: AxiosRequestConfig}
 ) => {
       const {mutation: mutationOptions, axios: axiosOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof loginUser>>, {data: PasswordLoginRequest}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof loginForAuthToken>>, {data: BodyLoginForAuthTokenTokenPost}> = (props) => {
           const {data} = props ?? {};
 
-          return  loginUser(data,axiosOptions)
+          return  loginForAuthToken(data,axiosOptions)
         }
 
-      return useMutation<Awaited<ReturnType<typeof loginUser>>, TError, {data: PasswordLoginRequest}, TContext>(mutationFn, mutationOptions)
+      return useMutation<Awaited<ReturnType<typeof loginForAuthToken>>, TError, {data: BodyLoginForAuthTokenTokenPost}, TContext>(mutationFn, mutationOptions)
     }
     /**
  * Provides a refresh token for the JWT session.
@@ -275,9 +289,9 @@ export const loginUser = (
  */
 export const refreshJwtToken = (
      options?: AxiosRequestConfig
- ): Promise<AxiosResponse<AuthResponse>> => {
+ ): Promise<AxiosResponse<Token>> => {
     return axios.post(
-      `/auth/refresh`,undefined,options
+      `/refresh`,undefined,options
     );
   }
 
@@ -312,7 +326,7 @@ export const logoutUser = (
      options?: AxiosRequestConfig
  ): Promise<AxiosResponse<unknown>> => {
     return axios.post(
-      `/auth/logout`,undefined,options
+      `/logout`,undefined,options
     );
   }
 
@@ -348,14 +362,14 @@ and exception if the user is not logged in.
  */
 export const getMe = (
      options?: AxiosRequestConfig
- ): Promise<AxiosResponse<UserRequest>> => {
+ ): Promise<AxiosResponse<UserResponse>> => {
     return axios.get(
-      `/auth/me`,options
+      `/me`,options
     );
   }
 
 
-export const getGetMeQueryKey = () => [`/auth/me`];
+export const getGetMeQueryKey = () => [`/me`];
 
     
 export type GetMeQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
