@@ -16,7 +16,7 @@ import Footer from "./footer";
  * 
  * @returns {JSX.Element}
  */
-function Authentication() {
+function AuthenticationContainer() {
     return(
         <div className="flex flex-col items-center justify-between w-screen h-screen">
             <Header/>
@@ -28,4 +28,4 @@ function Authentication() {
     );
 }
 
-export default Authentication;
+export default AuthenticationContainer;
