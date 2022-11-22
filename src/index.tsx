@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import {
   RouterProvider,
   createBrowserRouter,
+  redirect,
 } from "react-router-dom";
 
 import {
@@ -21,9 +22,6 @@ import './i18n';
 
 import ErrorPage from 'error-page';
 import App from './App';
-import Authentication from './routers/auth';
-import Login from './routers/auth/login';
-import OTP from './routers/auth/otp';
 
 import AdminContainer from 'routers/admin';
 import UserAdminIndex, {
@@ -43,8 +41,12 @@ import {
   action as destroyUserAction
 } from 'routers/admin/users/destroy';
 
-// Set a base URL
-Axios.defaults.baseURL = '/api/';
+// Authentication
+import AuthenticationContainer from 'routers/auth';
+import Login, {
+  action as loginAction
+} from 'routers/auth/login';
+import axios from 'axios';
 
 /**
  * QueryClient is what react-query uses to manage the cache
@@ -53,7 +55,36 @@ Axios.defaults.baseURL = '/api/';
  * This requires to be passed to react-router loaders and
  * actions for them to work with.
  */
- const queryClient = new QueryClient();
+const queryClient = new QueryClient();
+
+ // Set a base URL
+Axios.defaults.baseURL = '/api/';
+
+/**
+ * Add the token before each request
+ */
+axios.interceptors.request.use(config => {
+  if(config.headers) {
+    const accessToken = queryClient.getQueryData('access_token');
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
+  }
+  return config;
+}, error => {
+
+});
+
+/**
+ * If the response is unautorised then goto the
+ * login page
+ */
+axios.interceptors.response.use((config) => {
+  return config;
+}, (error) => {
+  if(error.response.status === 401) {
+    window.location.href = '/auth/login';
+  }
+  return Promise.reject(error);
+});
 
  /**
   * Router
@@ -63,6 +94,18 @@ const router = createBrowserRouter([
   path: "/",
   element: <App />,
   errorElement: <ErrorPage />,
+},
+{
+  path: "auth",
+  element: <AuthenticationContainer />,
+  children: [
+    {
+      path: "login",
+      action: loginAction(queryClient),
+      element: <Login />,  
+    }
+
+  ]
 },
 {
   path: "admin",
