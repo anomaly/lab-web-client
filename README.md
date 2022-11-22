@@ -10,7 +10,8 @@ Objectives:
 - [X] Proxy API from Docker container without any other dependencies 
 - [ ] Establish a pattern for [monorepos](https://www.robinwieruch.de/javascript-monorepos/) for applications with multiple modules.
 - [ ] End-to-end testing using [Microsoft Playwright](https://playwright.dev/)
-- [X] API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
+- [X] ~~API calls with [autorest-typescript](https://github.com/Azure/autorest.typescript) or [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)~~
+- [X] [react-query](https://tanstack.com/query/v4/) based caching, using [react-router](https://reactrouter.com/en/main/components/form) `v6.4.x` and [orval](https://orval.dev) based API code generation (plenty documentation available in the `README`)
 - [ ] [Storybook](https://storybook.js.org) to prototype components
 
 Standard Libraries and UI components:
@@ -18,7 +19,7 @@ Standard Libraries and UI components:
 - [ ] [Loading skeletons](https://github.com/buildo/react-placeholder)
 - [ ] DatePicker component, Airbnb makes available their [date component](https://airbnb.io/projects/react-dates/)
 - [ ] [Rich/Markdown editor](https://github.com/facebook/lexical)
-- [X] React Hook Forms
+- [X] ~~React Hook Forms~~ probably no longer required in favour of [native validation](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 - [ ] React Drop Zone for file upload 
 - [ ] Research and recommend animation libraries, e.g Framer Motion
 - [ ] [React Phone number input](react-phone-number-input/)
