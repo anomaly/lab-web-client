@@ -323,15 +323,19 @@ Our Python server lab outlines how to configure the `operationId` in FastAPI, wh
 
 ## Conventions
 
-Component is always PascalCase
+The following are opinionated conventions for the Anomaly templates. They have been informed by UNIX based systems modern web development techniques:
 
-Instance is always camelCase
+Our react components are always named in `PascalCase`:
 
-Files names are kebab case
+```tsx
+export const MyComponent = () => {
+  return <div>MyComponent</div>;
+};
+```
 
+The file containing the component `MyComponent` must be same as the component but in `kebab-case` i.e. `my-component.tsx`.
 
-
-
+When instantiating a component the instance must be assigned to a variable name in `camelCase`
 
 ## Internationalization
 
