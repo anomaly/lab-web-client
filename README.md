@@ -375,8 +375,19 @@ Conventions for our file and folder structure is as follows:
 
 The `@types` folder has the type definitions requires for the internationalisation to work with TypeScript.
 
+Trnaslation files are `JSON` files (placed in `i18n/language_code/namespace.json`):
 
-Once this is setup you can use the `useTranslation` hook to access the translations in your components.
+```json
+{
+  "title": {
+    "welcome": "Welcome to {{site_name}}"
+  }
+}
+```
+
+Note that we have nested keys, this is to allow for more complex translations. The `{{site_name}}` is a placeholder for the value of `site_name` which is passed in as a parameter to the `t` function.
+
+Once this is setup you can use the `useTranslation` hook to access the translations in your components (notice the `site_name` variable being provided a dynamic value).
 
 ```tsx
 import { Helmet } from 'react-helmet';
@@ -396,7 +407,7 @@ function App() {
       <Helmet>
         <title>
         {t('title.welcome', {
-          site_name: "ELSA-2"
+          site_name: "Labs"
         })}
         </title>
         <meta name="description" content="Welcome to ELSA F-2" />
@@ -409,9 +420,6 @@ export default App;
 ```
 
 > You don not need to do this as the project is already configured for internationalization, these are just notes for reference.
-
-
-
 
 ## Structure
 
