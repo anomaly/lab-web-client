@@ -358,6 +358,8 @@ yarn add i18next react-i18next --save
 additionally you can add `i18next-browser-languagedetector` for automatic language detection (this is up to your use case, if you want the user to choose their language or inherit from their browser settings).
 
 ```sh
+yarn add i18next-browser-languagedetector
+```
 
 Namespaces are `react-i18n` way of allowing projects to have translations split into [multiple files](https://react.i18next.com/guides/multiple-translation-files).
 
