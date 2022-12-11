@@ -1,0 +1,11 @@
+{
+    "title": {
+        "oops": "Oops!"
+    },
+    "message": {
+        "not_found": "There was a problem delivering the page you were after."
+    },
+    "label": {
+        "return_home": "Return to the home page"
+    }
+}
