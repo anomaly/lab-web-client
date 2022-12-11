@@ -3,7 +3,7 @@
 Objectives:
 - [X] Typescript based Create React App base project
 - [X] Validated SSL without any other dependencies
-- [ ] Internationalization support
+- [X] Internationalization support
 - [X] Tailwind CSS based theming support
 - [X] Header `<head>` management for usability using [Helmet](https://github.com/nfl/react-helmet)
 - [ ] Meeting W3C AAA Accessibility
@@ -346,6 +346,70 @@ Things to consider are:
 - Ability to provide multiple locales (even English varies between countries like USA and the UK)
 
 There are several providers like [Locaize](https://locize.com) that help with the translation services.
+
+### Setting up react-i18n
+
+We use the [react-i18next](https://react.i18next.com/) library for internationalization. The following steps are taken to set up the library:
+
+```sh
+yarn add i18next react-i18next --save
+```
+
+additionally you can add `i18next-browser-languagedetector` for automatic language detection (this is up to your use case, if you want the user to choose their language or inherit from their browser settings).
+
+```sh
+
+Namespaces are `react-i18n` way of allowing projects to have translations split into [multiple files](https://react.i18next.com/guides/multiple-translation-files).
+
+Our setup is loosely based on the [react-typescript](https://github.com/i18next/react-i18next/tree/master/example/react-typescript/simple-multi-namespaces) example with multiple `namespaces`.
+
+Conventions for our file and folder structure is as follows:
+
+- group namespaces into languages named by the language code e.g `en` or more specifically `en-AU`
+- each namespace should be a file named by the namespace e.g `common.json` or `dashboard.json` that relates to a particular part of your application.
+- Each language must provide every `namespace` declared by the application
+- The set of master translations should be in the primary language of the application e.g `en-AU` or `en-US` and the others follow
+- The `i18n/config.ts` is the configuration file for the internationalisation library. This is what's imported in `index.ts`
+
+The `@types` folder has the type definitions requires for the internationalisation to work with TypeScript.
+
+
+Once this is setup you can use the `useTranslation` hook to access the translations in your components.
+
+```tsx
+import { Helmet } from 'react-helmet';
+
+import {
+  useTranslation
+} from "react-i18next";
+
+function App() {
+
+  // Internationalisation
+  // @ts-ignore
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col justify-center w-screen h-screen font-bold text-black app">
+      <Helmet>
+        <title>
+        {t('title.welcome', {
+          site_name: "ELSA-2"
+        })}
+        </title>
+        <meta name="description" content="Welcome to ELSA F-2" />
+      </Helmet>
+    </div>
+  );
+}
+
+export default App;
+```
+
+> You don not need to do this as the project is already configured for internationalization, these are just notes for reference.
+
+
+
 
 ## Structure
 
