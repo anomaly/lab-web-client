@@ -410,7 +410,7 @@ function App() {
           site_name: "Labs"
         })}
         </title>
-        <meta name="description" content="Welcome to ELSA F-2" />
+        <meta name="description" content="Welcome to Anomaly Labs" />
       </Helmet>
     </div>
   );
@@ -427,6 +427,31 @@ The following is an evolving conversation. While there's no official pattern for
 
 - `src/components`, contain components that are truly reused around the project, if there's a particular component tied to a view then it makes more sense to keep it within the view folder.
 - `src/views`, contains views for the application. These should be grouped by function e.g authentication, dashboard.
+
+## Docker container for production
+
+For many instances we serve that built web client via an S3 compatible object store. Most infrastructure providers allow serving files from an S3 compatible object store (see the following section for details), however in simpler use cases you use a Docker container to serve the static files.
+
+Refer to the `Dockerfile` on this repository to see how we setup a two phase build that:
+- Sets up an environment with the `package.json` and `yarn.lock` file using the `NodeJS` image
+- Builds the `react` application
+- Builds an `nginx` image and copies the built `React` app to the image
+
+> Note: we're literally using the default `nginx` configuration to serve the files
+
+To test the setup, first build the image using:
+
+```sh
+docker build -t lab-web-client -f Dockerfile .
+```
+
+you can test the image by using the built image:
+
+```sh
+docker run -p 8080:80 lab-web-client
+```
+
+which will expose port `80` from the image to port `8080` on your local machine. You can then visit `http://localhost:8080` to see the application. When building for deployment on `x86/64` architecture you must specify the platform `--platform=linux/amd64` via the flag.
 
 ## S3 Wisdom
 
