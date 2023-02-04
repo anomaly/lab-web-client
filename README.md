@@ -91,6 +91,26 @@ Lastly update `package.json` so the `start` script can use the generated certifi
   },
 ```
 
+## `tsconfig.json` modifications
+
+Amongst other things we add the `src` folder to the `include` section so that the TypeScript compiler can find our source files.
+
+```json
+{
+  "compilerOptions": {
+  },
+  "include": [
+    "src"
+  ]
+}
+```
+
+the imports read from the top of the `src` folder e.g:
+
+```ts
+import { UserTypeRequest } from 'api/models';
+```
+
 ## Using React to proxy the API
 
 Our intention is to keep things simple and not introduce tools unless it's absolutely necessary. CRA provides a guide to [proxying](https://create-react-app.dev/docs/proxying-api-requests-in-development/) APIs calls. There's a simple setup and then a more complex one that uses [http-proxy-middleware](https://www.npmjs.com/package/http-proxy-middleware).

@@ -18,7 +18,7 @@ import reportWebVitals from './reportWebVitals';
 import Axios from 'axios';
 
 import './index.css';
-import './i18n';
+import './i18n/config';
 
 import ErrorPage from 'error-page';
 import App from './App';
