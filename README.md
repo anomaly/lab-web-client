@@ -357,6 +357,8 @@ The file containing the component `MyComponent` must be same as the component bu
 
 When instantiating a component the instance must be assigned to a variable name in `camelCase`
 
+> macOS by default uses a type insensitive file system, using CamelCase for file names can cause issues on other platforms. This will be masked if you build on your local desktop but will come to light if you are using a CI/CD pipeline.
+
 ## Internationalization
 
 Even thought your application may never be used across regions (highly unlikely if you are building a global product), it's still a good idea to internationalize your application. This is because it's a good practice to get into and it's a good way to learn about the tools and techniques. It is also easier to internationalize your application from the start than to do it later.
