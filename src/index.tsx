@@ -41,6 +41,12 @@ import {
   action as destroyUserAction
 } from 'routers/admin/users/destroy';
 
+import UploadContainer from 'routers/upload';
+import { 
+  action as sampleUploadAction
+} from 'routers/upload/sample';
+import SampleUpload from 'routers/upload/sample';
+
 // Authentication
 import AuthenticationContainer from 'routers/auth';
 import Login, {
@@ -105,6 +111,17 @@ const router = createBrowserRouter([
       element: <Login />,  
     }
 
+  ]
+},
+{
+  path: "file",
+  element: <UploadContainer />,
+  children: [
+    {
+      path: "",
+      element: <SampleUpload />,
+      action: sampleUploadAction(queryClient),
+    }
   ]
 },
 {
