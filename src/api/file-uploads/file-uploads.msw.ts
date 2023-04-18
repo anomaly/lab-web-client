@@ -16,11 +16,17 @@ aim of the project is:
 import {
   rest
 } from 'msw'
+import {
+  faker
+} from '@faker-js/faker'
 
-export const getDefaultMSW = () => [
-rest.get('*/', (_req, res, ctx) => {
+export const getGetUploadUrlMock = () => ({presignedUploadUrl: faker.random.word(), expires: faker.datatype.number({min: undefined, max: undefined})})
+
+export const getFileUploadsMSW = () => [
+rest.post('*/upload', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
+ctx.json(getGetUploadUrlMock()),
         )
       }),]

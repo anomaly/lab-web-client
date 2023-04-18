@@ -28,6 +28,8 @@ into serializable models.
 For a full set of options, see:
 https://pydantic-docs.helpmanual.io/usage/model_config/
  */
-export interface OTPTriggerSMSRequest {
-  mobileNumber: string;
+export interface FileUploadRequest {
+  fileName: string;
+  fileSize: number;
+  mimeType: string;
 }
