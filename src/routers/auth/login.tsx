@@ -20,7 +20,7 @@ async({ request } : any) => {
     }).catch((error) => {
         console.log(error);
     });
-    return redirect('/admin/users');
+    return redirect('/file');
 };
 
 function Login() {
