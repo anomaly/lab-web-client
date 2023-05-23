@@ -1,5 +1,13 @@
 # Lab - Standardised Web Client
 
+> **Deprecation Warning**: This project has been of immense value to discover best practices around React, with stacks like [Remix](https://remix.run) becoming the way of building React apps, which offers consolidation of many of the plugins in use and cutting down a lot of edge case handling, it makes sense for us to move to a framework like Remix.
+> 
+> Remix offers a full stack approach and takes advantage of Server Side Rendering, improving performance of the client side applications. We still believe in the value of an API and decoupling the front end from the server side logic. The approach allows us to move away from Remix if it appeared to be the right decision to make or support native mobile clients for our applications.
+> 
+> The result is the [psychedelic-stack](https://github.com/anomaly/psychedelic-stack) which maintains our Python foundation on the server and uses Remix in a Backend for your Frontend approach.
+> 
+> Most of what have learnt by building this client will be migrated or ported as appropriate.
+
 Objectives:
 - [X] Typescript based Create React App base project
 - [X] Validated SSL without any other dependencies
